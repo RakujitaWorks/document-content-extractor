@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Word・Excel・PowerPointファイルから画像、テキスト、埋め込みデータをブラウザ内で抽出し、ZIPにまとめるローカル処理ツールです。">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none'; script-src 'self'; style-src 'self'; img-src data: blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Document Content Extractor</title>
+  <link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+  <div id="page-drop-overlay" class="page-drop-overlay" role="status"
+    aria-live="polite" aria-hidden="true" hidden>
+    <div class="page-drop-overlay-panel">
+      <strong>ファイルまたはフォルダをここへドロップ</strong>
+      <span>ページ内のどこにドロップしても追加できます</span>
+    </div>
+  </div>
+
+  <main class="app">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">LOCAL & PRIVATE</p>
+        <h1>Document Content Extractor</h1>
+        <p class="subtitle">
+          Word・Excel・PowerPointからメディアやテキストを一括抽出。ブラウザ内だけで抽出して1個のZIPにまとめます。
+        </p>
+      </div>
+      <div class="local-badge">ブラウザ内で完結・外部送信なし</div>
+    </header>
+
+    <section class="panel" aria-labelledby="input-heading">
+      <h2 id="input-heading" class="visually-hidden">入力ファイル</h2>
+      <div class="toolbar">
+        <button id="add-files" type="button">ファイルを追加</button>
+        <button id="add-folder" type="button">フォルダを追加</button>
+        <button id="remove-selected" type="button" disabled>選択した項目を削除</button>
+        <button id="clear-files" type="button" disabled>クリア</button>
+        <span class="spacer"></span>
+        <button id="cancel-processing" class="danger" type="button" disabled>処理を中止</button>
+        <button id="export-zip" class="primary" type="button" disabled>全件をZIPで書き出す</button>
+      </div>
+
+      <input id="file-input" class="visually-hidden" type="file" multiple
+        accept=".doc,.docx,.docm,.xls,.xlsx,.xlsm,.xltx,.xltm,.ppt,.pptx,.pptm,.potx,.potm">
+      <input id="folder-input" class="visually-hidden" type="file" multiple webkitdirectory>
+
+      <div id="drop-zone" class="drop-zone" tabindex="0" role="button"
+        aria-label="Officeファイルを追加。フォルダはドロップまたはフォルダを追加ボタンから選択できます">
+        <strong>ファイルまたはフォルダをここへドロップ</strong>
+        <span>対応形式は .doc / .docx / .docm / .xls / .xlsx / .xlsm / .xltx / .xltm / .ppt / .pptx / .pptm / .potx / .potm</span>
+      </div>
+
+      <div class="options">
+        <label class="option">
+          <input id="include-subfolders" type="checkbox" checked>
+          フォルダ追加時にサブフォルダも読み込む
+        </label>
+        <label class="option">
+          <input id="include-text" type="checkbox" checked>
+          テキストも抽出する
+        </label>
+        <label class="option">
+          <input id="include-embeddings" type="checkbox" checked>
+          埋め込みデータも抽出する
+        </label>
+      </div>
+
+      <div id="compatibility-warning" class="compatibility-warning" role="status" hidden>
+        このブラウザではOOXML形式のZIP展開機能を利用できません。
+        ChromeまたはEdgeの現行安定版を使用してください。旧 .doc / .xls / .ppt は検査できます。
+      </div>
+
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th><input id="select-all" type="checkbox"
+                aria-label="削除対象をすべて選択" title="削除対象をすべて選択"></th>
+              <th>ファイル名</th>
+              <th>相対パス</th>
+              <th>拡張子</th>
+              <th>サイズ</th>
+              <th>判定状態</th>
+            </tr>
+          </thead>
+          <tbody id="file-list">
+            <tr class="empty-row">
+              <td colspan="6">Officeファイルが追加されていません。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="selection-help">
+        一覧のチェックは削除対象の選択にのみ使用します。ZIP書き出しでは、一覧内の処理可能な全ファイルが対象になります。
+      </p>
+
+      <div class="progress-card" aria-live="polite">
+        <div class="progress-track" role="progressbar" aria-label="処理進捗"
+          aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div id="progress-numbers" class="progress-numbers">0 / 0　0%</div>
+        <div id="progress-current" class="progress-current">待機中</div>
+      </div>
+
+      <div class="log-title">
+        <h2>処理ログ</h2>
+        <button id="clear-log" type="button">ログを消去</button>
+      </div>
+      <pre id="log" class="log" aria-live="polite">[情報] ファイルを追加してください。</pre>
+
+      <div class="notes">
+        <div class="note">
+          <strong>外部送信は行いません</strong>
+          Officeファイルはサーバーへ送信されず、現在のブラウザ内だけで処理されます。
+        </div>
+        <div class="note">
+          <strong>ご利用前の注意</strong>
+          本ツールは元のOfficeファイルを書き換えませんが、
+          すべてのファイルでの正常動作や抽出結果の完全性を保証するものではありません。
+          重要なファイルはバックアップを保管したうえで、利用者自身の判断で使用してください。
+        </div>
+        <div class="note">
+          <strong>旧Office形式について</strong>
+          Office 97～2003形式は救済的な抽出です。文書構造、文字順、書式、
+          オブジェクトとの対応を完全には再現できない場合があります。
+        </div>
+        <div class="note">
+          <strong>テキスト抽出の範囲</strong>
+          主要な本文、セル、図形内テキスト、表、発表者ノートを抽出します。
+          配置情報をもとに見た目に近い順序へ整えますが、
+          複雑なレイアウトでは画面上の順序と異なる場合があります。
+        </div>
+        <div class="note">
+          <strong>埋め込みデータについて</strong>
+          OLEや添付ファイルの内部データを抽出します。元のファイル形式へ復元できず、
+          .binのまま出力される場合があります。抽出物は実行しないでください。
+        </div>
+        <div class="note">
+          <strong>処理中止について</strong>
+          大きなファイルや複雑な旧Officeファイルでは、中止操作が反映されるまで時間がかかる場合があります。
+        </div>
+      </div>
+    </section>
+    <footer class="site-footer" aria-label="サイト情報">
+      <p class="site-footer-product">Document Content Extractor <span
+        class="site-footer-version">Version 1.0.0</span></p>
+      <div class="site-footer-meta">
+        <span class="site-footer-meta-item">© 2026 ラクジタワークス（RakuJita Works）</span>
+        <span class="site-footer-meta-item">
+          <span class="site-footer-link-separator" aria-hidden="true">｜</span>
+          <a
+            href="https://github.com/RakujitaWorks/document-content-extractor"
+            target="_blank"
+            rel="noopener noreferrer"
+          >使い方・注意事項</a>
+        </span>
+        <span class="site-footer-meta-item">
+          <span class="site-footer-link-separator" aria-hidden="true">｜</span>
+          <a
+            href="https://github.com/RakujitaWorks/document-content-extractor/blob/main/TERMS.md"
+            target="_blank"
+            rel="noopener noreferrer"
+          >利用条件</a>
+        </span>
+      </div>
+      <p class="site-footer-trademark">Microsoft、Microsoft 365、Office、Word、ExcelおよびPowerPointは、Microsoftグループの企業の商標です。<br>本ツールはMicrosoftによって提供、承認、後援されているものではありません。</p>
+    </footer>
+  </main>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
