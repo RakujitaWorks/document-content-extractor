@@ -112,10 +112,6 @@ ZIP/
 
 テキストはOfficeファイル別フォルダの直下へ `<正規化したOfficeファイル名>_text.txt` の形式で出力し、UTF-8（BOMなし）、改行コードCRLFで保存します。抽出結果がない空ファイルや空フォルダは作成しません。
 
-## ブラウザ試験
-
-ブラウザ動作試験はGoogle Chromeで実施します。Microsoft Edgeは、試験終了後に一時ファイルがロックされる場合があるため、自動試験と手動試験の対象外です。アプリの利用環境は、引き続きGoogle ChromeとMicrosoft Edgeです。
-
 ## 対応環境
 
 - Windows 10 / Windows 11
