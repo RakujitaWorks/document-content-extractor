@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
+    data-i18n-content="meta.description"
     content="Word・Excel・PowerPointファイルから画像、テキスト、埋め込みデータをブラウザ内で抽出し、ZIPにまとめるローカル処理ツールです。">
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'none'; script-src 'self'; style-src 'self'; img-src data: blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
@@ -14,33 +15,46 @@
   <div id="page-drop-overlay" class="page-drop-overlay" role="status"
     aria-live="polite" aria-hidden="true" hidden>
     <div class="page-drop-overlay-panel">
-      <strong>ファイルまたはフォルダをここへドロップ</strong>
-      <span>ページ内のどこにドロップしても追加できます</span>
+      <strong data-i18n="drop.heading">ファイルまたはフォルダをここへドロップ</strong>
+      <span data-i18n="drop.anywhere">ページ内のどこにドロップしても追加できます</span>
     </div>
   </div>
 
   <main class="app">
     <header class="hero">
-      <div>
+      <div class="hero-utility-row">
         <p class="eyebrow">LOCAL & PRIVATE</p>
-        <h1>Document Content Extractor</h1>
-        <p class="subtitle">
-          Word・Excel・PowerPointからメディアやテキストを一括抽出。ブラウザ内だけで抽出して1個のZIPにまとめます。
-        </p>
+        <div class="language-switcher" role="group" aria-label="表示言語"
+          data-i18n-aria-label="language.label">
+          <button id="language-ja" class="active" type="button" lang="ja"
+            aria-pressed="true">日本語</button>
+          <button id="language-en" type="button" lang="en"
+            aria-pressed="false">English</button>
+        </div>
       </div>
-      <div class="local-badge">ブラウザ内で完結・外部送信なし</div>
+      <div class="hero-main">
+        <div class="hero-copy">
+          <h1>Document Content Extractor</h1>
+          <p class="subtitle" data-i18n="hero.subtitle">
+            Word・Excel・PowerPointからメディアやテキストを一括抽出。ブラウザ内だけで抽出して1個のZIPにまとめます。
+          </p>
+        </div>
+        <div class="local-badge" data-i18n="hero.localBadge">ブラウザ内で完結・外部送信なし</div>
+      </div>
     </header>
 
     <section class="panel" aria-labelledby="input-heading">
-      <h2 id="input-heading" class="visually-hidden">入力ファイル</h2>
+      <h2 id="input-heading" class="visually-hidden" data-i18n="input.heading">入力ファイル</h2>
       <div class="toolbar">
-        <button id="add-files" type="button">ファイルを追加</button>
-        <button id="add-folder" type="button">フォルダを追加</button>
-        <button id="remove-selected" type="button" disabled>選択した項目を削除</button>
-        <button id="clear-files" type="button" disabled>クリア</button>
+        <button id="add-files" type="button" data-i18n="button.addFiles">ファイルを追加</button>
+        <button id="add-folder" type="button" data-i18n="button.addFolder">フォルダを追加</button>
+        <button id="remove-selected" type="button" data-i18n="button.removeSelected" disabled>選択した項目を削除</button>
+        <button id="clear-files" type="button" data-i18n="button.clearFiles" disabled>クリア</button>
         <span class="spacer"></span>
-        <button id="cancel-processing" class="danger" type="button" disabled>処理を中止</button>
-        <button id="export-zip" class="primary" type="button" disabled>全件をZIPで書き出す</button>
+        <button id="cancel-processing" class="danger" type="button"
+          data-i18n="button.cancelProcessing" disabled>処理を中止</button>
+        <button id="export-zip" class="primary" type="button"
+          data-i18n="button.exportZip" disabled>全件をZIPで書き出す</button>
       </div>
 
       <input id="file-input" class="visually-hidden" type="file" multiple
@@ -48,27 +62,29 @@
       <input id="folder-input" class="visually-hidden" type="file" multiple webkitdirectory>
 
       <div id="drop-zone" class="drop-zone" tabindex="0" role="button"
-        aria-label="Officeファイルを追加。フォルダはドロップまたはフォルダを追加ボタンから選択できます">
-        <strong>ファイルまたはフォルダをここへドロップ</strong>
-        <span>対応形式は .doc / .docx / .docm / .xls / .xlsx / .xlsm / .xltx / .xltm / .ppt / .pptx / .pptm / .potx / .potm</span>
+        aria-label="Officeファイルを追加。フォルダはドロップまたはフォルダを追加ボタンから選択できます"
+        data-i18n-aria-label="drop.ariaLabel">
+        <strong data-i18n="drop.heading">ファイルまたはフォルダをここへドロップ</strong>
+        <span data-i18n="drop.formats">対応形式は .doc / .docx / .docm / .xls / .xlsx / .xlsm / .xltx / .xltm / .ppt / .pptx / .pptm / .potx / .potm</span>
       </div>
 
       <div class="options">
         <label class="option">
           <input id="include-subfolders" type="checkbox" checked>
-          フォルダ追加時にサブフォルダも読み込む
+          <span data-i18n="option.includeSubfolders">フォルダ追加時にサブフォルダも読み込む</span>
         </label>
         <label class="option">
           <input id="include-text" type="checkbox" checked>
-          テキストも抽出する
+          <span data-i18n="option.includeText">テキストも抽出する</span>
         </label>
         <label class="option">
           <input id="include-embeddings" type="checkbox" checked>
-          埋め込みデータも抽出する
+          <span data-i18n="option.includeEmbeddings">埋め込みデータも抽出する</span>
         </label>
       </div>
 
-      <div id="compatibility-warning" class="compatibility-warning" role="status" hidden>
+      <div id="compatibility-warning" class="compatibility-warning" role="status"
+        data-i18n="warning.browserCompatibility" hidden>
         このブラウザではOOXML形式のZIP展開機能を利用できません。
         ChromeまたはEdgeの現行安定版を使用してください。旧 .doc / .xls / .ppt は検査できます。
       </div>
@@ -78,84 +94,81 @@
           <thead>
             <tr>
               <th><input id="select-all" type="checkbox"
-                aria-label="削除対象をすべて選択" title="削除対象をすべて選択"></th>
-              <th>ファイル名</th>
-              <th>相対パス</th>
-              <th>拡張子</th>
-              <th>サイズ</th>
-              <th>判定状態</th>
+                aria-label="削除対象をすべて選択" title="削除対象をすべて選択"
+                data-i18n-aria-label="table.selectAll" data-i18n-title="table.selectAll"></th>
+              <th data-i18n="table.fileName">ファイル名</th>
+              <th data-i18n="table.relativePath">相対パス</th>
+              <th data-i18n="table.extension">拡張子</th>
+              <th data-i18n="table.size">サイズ</th>
+              <th data-i18n="table.status">判定状態</th>
             </tr>
           </thead>
           <tbody id="file-list">
             <tr class="empty-row">
-              <td colspan="6">Officeファイルが追加されていません。</td>
+              <td colspan="6" data-i18n="table.empty">Officeファイルが追加されていません。</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="selection-help">
+      <p class="selection-help" data-i18n="table.selectionHelp">
         一覧のチェックは削除対象の選択にのみ使用します。ZIP書き出しでは、一覧内の処理可能な全ファイルが対象になります。
       </p>
 
       <div class="progress-card" aria-live="polite">
         <div class="progress-track" role="progressbar" aria-label="処理進捗"
+          data-i18n-aria-label="progress.label"
           aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           <div id="progress-bar" class="progress-bar"></div>
         </div>
         <div id="progress-numbers" class="progress-numbers">0 / 0　0%</div>
-        <div id="progress-current" class="progress-current">待機中</div>
+        <div id="progress-current" class="progress-current" data-i18n="progress.waiting">待機中</div>
       </div>
 
       <div class="log-title">
-        <h2>処理ログ</h2>
-        <button id="clear-log" type="button">ログを消去</button>
+        <h2 data-i18n="log.heading">処理ログ</h2>
+        <button id="clear-log" type="button" data-i18n="button.clearLog">ログを消去</button>
       </div>
       <pre id="log" class="log" aria-live="polite">[情報] ファイルを追加してください。</pre>
 
       <div class="notes">
         <div class="note">
-          <strong>外部送信は行いません</strong>
-          Officeファイルはサーバーへ送信されず、現在のブラウザ内だけで処理されます。
+          <strong data-i18n="note.local.heading">外部送信は行いません</strong>
+          <span data-i18n="note.local.body">Officeファイルはサーバーへ送信されず、現在のブラウザ内だけで処理されます。</span>
         </div>
         <div class="note">
-          <strong>ご利用前の注意</strong>
-          本ツールは元のOfficeファイルを書き換えませんが、
-          すべてのファイルでの正常動作や抽出結果の完全性を保証するものではありません。
-          重要なファイルはバックアップを保管したうえで、利用者自身の判断で使用してください。
+          <strong data-i18n="note.caution.heading">ご利用前の注意</strong>
+          <span data-i18n="note.caution.body">本ツールは元のOfficeファイルを書き換えませんが、すべてのファイルでの正常動作や抽出結果の完全性を保証するものではありません。重要なファイルはバックアップを保管したうえで、利用者自身の判断で使用してください。</span>
         </div>
         <div class="note">
-          <strong>旧Office形式について</strong>
-          Office 97～2003形式は救済的な抽出です。文書構造、文字順、書式、
-          オブジェクトとの対応を完全には再現できない場合があります。
+          <strong data-i18n="note.legacy.heading">旧Office形式について</strong>
+          <span data-i18n="note.legacy.body">Office 97～2003形式にも対応しています。新しいOffice形式とは内部構造が異なるため、ファイルの内容や作成環境によっては、取得できる画像やテキストに違いが生じる場合があります。</span>
         </div>
         <div class="note">
-          <strong>テキスト抽出の範囲</strong>
-          主要な本文、セル、図形内テキスト、表、発表者ノートを抽出します。
-          配置情報をもとに見た目に近い順序へ整えますが、
-          複雑なレイアウトでは画面上の順序と異なる場合があります。
+          <strong data-i18n="note.text.heading">テキスト抽出の範囲</strong>
+          <span data-i18n="note.text.body">主要な本文、セル、図形内テキスト、表、発表者ノートを抽出します。配置情報をもとに見た目に近い順序へ整えますが、複雑なレイアウトでは画面上の順序と異なる場合があります。</span>
         </div>
         <div class="note">
-          <strong>埋め込みデータについて</strong>
-          OLEや添付ファイルの内部データを抽出します。元のファイル形式へ復元できず、
-          .binのまま出力される場合があります。抽出物は実行しないでください。
+          <strong data-i18n="note.embedded.heading">埋め込みデータについて</strong>
+          <span data-i18n="note.embedded.body">OLEや添付ファイルの内部データを抽出します。元のファイル形式へ復元できず、.binのまま出力される場合があります。抽出物は実行しないでください。</span>
         </div>
         <div class="note">
-          <strong>処理中止について</strong>
-          大きなファイルや複雑な旧Officeファイルでは、中止操作が反映されるまで時間がかかる場合があります。
+          <strong data-i18n="note.cancel.heading">処理中止について</strong>
+          <span data-i18n="note.cancel.body">大きなファイルや複雑な旧Officeファイルでは、中止操作が反映されるまで時間がかかる場合があります。</span>
         </div>
       </div>
     </section>
-    <footer class="site-footer" aria-label="サイト情報">
+    <footer class="site-footer" aria-label="サイト情報" data-i18n-aria-label="footer.ariaLabel">
       <p class="site-footer-product">Document Content Extractor <span
         class="site-footer-version">Version 1.0.0</span></p>
       <div class="site-footer-meta">
-        <span class="site-footer-meta-item">© 2026 ラクジタワークス（RakuJita Works）</span>
+        <span class="site-footer-meta-item" data-i18n="footer.copyright">© 2026 ラクジタワークス（RakuJita Works）</span>
         <span class="site-footer-meta-item">
           <span class="site-footer-link-separator" aria-hidden="true">｜</span>
           <a
             href="https://github.com/RakujitaWorks/document-content-extractor"
             target="_blank"
             rel="noopener noreferrer"
+            data-i18n="footer.usageLink"
           >使い方・注意事項</a>
         </span>
         <span class="site-footer-meta-item">
@@ -164,10 +177,11 @@
             href="https://github.com/RakujitaWorks/document-content-extractor/blob/main/TERMS.md"
             target="_blank"
             rel="noopener noreferrer"
+            data-i18n="footer.termsLink"
           >利用条件</a>
         </span>
       </div>
-      <p class="site-footer-trademark">Microsoft、Microsoft 365、Office、Word、ExcelおよびPowerPointは、Microsoftグループの企業の商標です。<br>本ツールはMicrosoftによって提供、承認、後援されているものではありません。</p>
+      <p class="site-footer-trademark"><span data-i18n="footer.trademark">Microsoft、Microsoft 365、Office、Word、ExcelおよびPowerPointは、Microsoftグループの企業の商標です。</span><br><span data-i18n="footer.disclaimer">本ツールはMicrosoftによって提供、承認、後援されているものではありません。</span></p>
     </footer>
   </main>
 

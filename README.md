@@ -10,6 +10,14 @@ Version 1.0.0
 
 [Document Content Extractorをブラウザで開く](https://rakujitaworks.github.io/document-content-extractor/)
 
+## 表示言語
+
+画面表示は日本語と英語に対応しています。
+
+ページを開いた時点で、ブラウザの優先言語が日本語の場合は日本語、それ以外の場合は英語で表示されます。画面上の言語切替から、ページを再読み込みせずに表示言語を変更できます。
+
+選択した言語は保存されません。ページを再読み込みすると、ブラウザ言語から再度判定されます。
+
 ## 主な特徴
 
 - Word・Excel・PowerPointの新旧Office形式に対応

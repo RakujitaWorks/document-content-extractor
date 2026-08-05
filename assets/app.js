@@ -56,10 +56,679 @@
       ["髙", "高"]
     ];
 
+    var TRANSLATIONS = {
+      ja: {
+        "meta.description": "Word・Excel・PowerPointファイルから画像、テキスト、埋め込みデータをブラウザ内で抽出し、ZIPにまとめるローカル処理ツールです。",
+        "language.label": "表示言語",
+        "hero.subtitle": "Word・Excel・PowerPointからメディアやテキストを一括抽出。ブラウザ内だけで抽出して1個のZIPにまとめます。",
+        "hero.localBadge": "ブラウザ内で完結・外部送信なし",
+        "input.heading": "入力ファイル",
+        "button.addFiles": "ファイルを追加",
+        "button.addFolder": "フォルダを追加",
+        "button.removeSelected": "選択した項目を削除",
+        "button.clearFiles": "クリア",
+        "button.cancelProcessing": "処理を中止",
+        "button.exportZip": "全件をZIPで書き出す",
+        "button.clearLog": "ログを消去",
+        "drop.heading": "ファイルまたはフォルダをここへドロップ",
+        "drop.anywhere": "ページ内のどこにドロップしても追加できます",
+        "drop.formats": "対応形式は .doc / .docx / .docm / .xls / .xlsx / .xlsm / .xltx / .xltm / .ppt / .pptx / .pptm / .potx / .potm",
+        "drop.ariaLabel": "Officeファイルを追加。フォルダはドロップまたはフォルダを追加ボタンから選択できます",
+        "option.includeSubfolders": "フォルダ追加時にサブフォルダも読み込む",
+        "option.includeText": "テキストも抽出する",
+        "option.includeEmbeddings": "埋め込みデータも抽出する",
+        "warning.browserCompatibility": "このブラウザではOOXML形式のZIP展開機能を利用できません。ChromeまたはEdgeの現行安定版を使用してください。旧 .doc / .xls / .ppt は検査できます。",
+        "table.selectAll": "削除対象をすべて選択",
+        "table.selectItem": "{name}を削除対象として選択",
+        "table.selectItemTitle": "削除対象として選択",
+        "table.fileName": "ファイル名",
+        "table.relativePath": "相対パス",
+        "table.extension": "拡張子",
+        "table.size": "サイズ",
+        "table.status": "判定状態",
+        "table.empty": "Officeファイルが追加されていません。",
+        "table.selectionHelp": "一覧のチェックは削除対象の選択にのみ使用します。ZIP書き出しでは、一覧内の処理可能な全ファイルが対象になります。",
+        "progress.label": "処理進捗",
+        "progress.waiting": "待機中",
+        "progress.checkingInternalFormat": "内部形式を確認しています",
+        "progress.extractingMedia": "メディアを抽出しています",
+        "progress.extractingText": "テキストを抽出しています",
+        "progress.extractingEmbeddings": "埋め込みデータを抽出しています",
+        "progress.addingToZip": "ZIPへ追加しています",
+        "progress.readingFile": "{name}：ファイルを読み込んでいます",
+        "progress.fileStage": "{name}：{stage}",
+        "progress.fileFinished": "{name}：処理を終了しました",
+        "progress.completed": "完了しました",
+        "progress.generatingZip": "ZIPを生成しています",
+        "progress.cancelled": "処理を中止しました",
+        "progress.error": "エラーで終了しました",
+        "log.heading": "処理ログ",
+        "log.level.info": "情報",
+        "log.level.warning": "警告",
+        "log.level.error": "エラー",
+        "log.level.success": "完了",
+        "log.addPrompt": "ファイルを追加してください。",
+        "log.cleared": "ログを消去しました。",
+        "log.zeroByteSkipped": "0バイトのため追加しませんでした: {name}",
+        "log.fileTooLarge": "入力ファイルのサイズ上限を超えています: {name}",
+        "log.totalTooLarge": "入力ファイルの合計サイズが安全上限を超えるため追加しませんでした: {name}",
+        "log.filesAdded.one": "{count}件のファイルを追加しました。",
+        "log.filesAdded.other": "{count}件のファイルを追加しました。",
+        "log.subfoldersSkipped.one": "サブフォルダ内の{count}件はオプションがオフのため追加しませんでした。",
+        "log.subfoldersSkipped.other": "サブフォルダ内の{count}件はオプションがオフのため追加しませんでした。",
+        "log.noFilesAdded": "追加できるファイルはありませんでした。",
+        "log.noProcessableFiles": "処理対象ファイルがありません。",
+        "log.fileWarning": "{name}：{warning}",
+        "log.noExtractableContent": "抽出可能なメディア、テキスト、埋め込みデータが見つかりません: {name}",
+        "log.fileError": "{message}: {name}",
+        "log.noZipResults": "ZIPへ保存できる抽出結果がありませんでした。",
+        "log.zipGenerated": "{name} を生成しました（抽出成功{success}件、結果なし{empty}件、失敗{failed}件）。",
+        "log.cancelled": "利用者の操作により処理を中止しました。",
+        "log.folderReadFailed.one": "{count}件のフォルダをドラッグ＆ドロップで読み取れませんでした。「フォルダを追加」を使用してください。",
+        "log.folderReadFailed.other": "{count}件のフォルダをドラッグ＆ドロップで読み取れませんでした。「フォルダを追加」を使用してください。",
+        "log.dropItemsFailed.one": "{count}件のドロップ項目を読み取れませんでした。「ファイルを追加」を使用してください。",
+        "log.dropItemsFailed.other": "{count}件のドロップ項目を読み取れませんでした。「ファイルを追加」を使用してください。",
+        "log.removed.one": "{count}件を一覧から削除しました。",
+        "log.removed.other": "{count}件を一覧から削除しました。",
+        "log.listCleared.one": "{count}件の入力一覧をクリアしました。",
+        "log.listCleared.other": "{count}件の入力一覧をクリアしました。",
+        "log.cancelRequested": "処理の中止を要求しました。現在の安全な区切りで停止します。",
+        "log.dropReadFailed": "ドロップした項目を読み取れませんでした: {message}",
+        "log.browserUnsupported": "このブラウザはDeflate展開APIに対応していません。ChromeまたはEdgeの現行安定版を使用してください。",
+        "summary.result": "{name}（{media}、{characters}、{embeddings}）",
+        "summary.media.one": "メディア{count}件",
+        "summary.media.other": "メディア{count}件",
+        "summary.characters.one": "テキスト{count}文字",
+        "summary.characters.other": "テキスト{count}文字",
+        "summary.embeddings.one": "埋め込み{count}件",
+        "summary.embeddings.other": "埋め込み{count}件",
+        "status.ready": "処理対象",
+        "status.checking": "確認中",
+        "status.unsupported": "未対応形式",
+        "status.formatMismatch": "内部形式不一致",
+        "status.encrypted": "暗号化の可能性",
+        "status.browserUnsupported": "ブラウザ非対応",
+        "status.processing": "処理中",
+        "status.completed": "抽出完了",
+        "status.completedWithWarnings": "警告あり",
+        "status.noResults": "結果なし",
+        "status.error": "解析エラー",
+        "status.processingFailed": "処理失敗",
+        "status.cancelled": "中止",
+        "status.detail.unsupported": "未対応の拡張子です。",
+        "status.detail.formatMismatchOoxml": "拡張子とOOXML内部形式が一致しません。",
+        "status.detail.formatMismatchCfb": "拡張子とCFB内部形式が一致しません。",
+        "status.detail.missingSignature": "ZIPまたはCFBシグネチャがありません。",
+        "status.detail.ooxml": "OOXML {family}",
+        "status.detail.cfb": "CFB {family}",
+        "status.detail.encryptedOoxml": "暗号化OOXMLパッケージです。",
+        "status.detail.encryptedLegacy": "Officeバイナリ形式に暗号化情報があります。",
+        "status.detail.browserUnsupported": "このブラウザではOOXML形式のZIP展開機能を利用できません。",
+        "status.detail.checking": "内部形式を確認しています。",
+        "status.detail.processing": "抽出処理を実行しています。",
+        "status.detail.noResults": "解析は完了しましたが、抽出対象がありませんでした。",
+        "status.detail.completed": "抽出処理が完了しました。",
+        "status.detail.completedWithWarnings": "一部の抽出処理に警告があります。",
+        "status.detail.cancelled": "利用者の操作により処理を中止しました。",
+        "message.value": "{message}",
+        "warning.textOmitted": "抽出テキストが安全上限を超えたため、テキスト出力を省略しました。",
+        "warning.noText": "有効な文書テキストが見つかりませんでした。",
+        "warning.media": "一部のメディアを抽出できませんでした。",
+        "warning.text": "一部のテキストを抽出できませんでした。",
+        "warning.embedded": "一部の埋め込みデータを抽出できませんでした。",
+        "warning.word": "一部のWord文書構造を完全に復元できませんでした。",
+        "warning.excel": "一部のExcel文書構造を完全に復元できませんでした。",
+        "warning.powerpoint": "一部のPowerPoint文書構造を完全に復元できませんでした。",
+        "warning.generic": "一部の文書内容を完全に処理できませんでした。",
+        "warning.subject.wordChart": "Wordグラフ",
+        "warning.subject.altChunk": "altChunk",
+        "warning.subject.footnote": "脚注",
+        "warning.subject.endnote": "文末脚注",
+        "warning.subject.legacyFootnote": "旧Word脚注",
+        "warning.subject.legacyEndnote": "旧Word文末脚注",
+        "warning.subject.mainTextbox": "本文テキストボックス",
+        "warning.subject.headerFooterTextbox": "ヘッダー／フッター内テキストボックス",
+        "warning.subject.mainShapeAnchor": "本文図形アンカー文字",
+        "warning.subject.headerFooterShapeAnchor": "ヘッダー／フッター図形アンカー文字",
+        "warning.subject.media": "メディア",
+        "warning.subject.text": "テキスト",
+        "warning.subject.embedding": "埋め込みデータ",
+        "warning.document.word": "Word",
+        "warning.document.legacyWord": "旧Word",
+        "warning.value.empty": "（空）",
+        "warning.value.noContentType": "Content Typeなし",
+        "warning.section.unplacedMainTextbox": "配置を復元できないテキストボックス",
+        "warning.section.unplacedHeaderFooterTextbox": "配置を復元できないヘッダー／フッター内テキストボックス",
+        "warning.referenceMissingId": "{subject}参照にrelationship IDがないため読み飛ばしました。",
+        "warning.referenceRelationshipMissing": "{subject}参照 {id} のrelationshipが見つかりませんでした。",
+        "warning.externalReferenceSkipped": "外部{subject}参照は安全のため読み飛ばしました: {id}",
+        "warning.referenceKindMismatch": "{subject}参照 {id} のrelationship種類が一致しませんでした。",
+        "warning.partMissing": "{subject}パーツが見つかりませんでした: {name}",
+        "warning.unsupportedAltChunk": "未対応のaltChunk形式を読み飛ばしました: {type}",
+        "warning.partParseFailed": "{subject}パーツを解析できなかったため読み飛ばしました: {name}",
+        "warning.annotationDefinitionMissingId": "{subject}定義にIDがないため、その定義を読み飛ばしました。",
+        "warning.annotationDuplicateId": "{subject}ID {id} が重複しているため、最初の定義を使用しました。",
+        "warning.annotationBodyMissing": "{subject}参照ID {id} に対応する本文が見つかりませんでした。",
+        "warning.wordNoPageBreak": "{document}文書に利用可能なページ区切り情報がないため、文書全体を1つの論理ページとして脚注を配置しました。",
+        "warning.unreferencedAnnotation.one": "未参照の{subject}が{count}件あります。",
+        "warning.unreferencedAnnotation.other": "未参照の{subject}が{count}件あります。",
+        "warning.legacyAnnotationEmptyStory": "旧Wordの{subject}本文がない状態で参照PLCを解析できませんでした。",
+        "warning.legacyAnnotationCountMismatch": "旧Wordの{subject}参照数と本文数が一致しないため、対応できる範囲だけを配置します。",
+        "warning.legacyAnnotationPositionFallback": "旧Wordの{subject}参照位置を復元できないため、独立セクションへ出力します。理由: {message}",
+        "warning.legacyTextboxPlcFallback": "旧Wordの{subject}本文PLCを解析できないため、「{section}」セクションへ出力します。理由: {message}",
+        "warning.legacyTextboxInvalidRange.one": "旧Wordの{subject}に不正なテキスト範囲が{count}件あるため、取得可能な本文を「{section}」セクションへ出力します。",
+        "warning.legacyTextboxInvalidRange.other": "旧Wordの{subject}に不正なテキスト範囲が{count}件あるため、取得可能な本文を「{section}」セクションへ出力します。",
+        "warning.legacyTextboxMissingParagraphEnd.one": "旧Wordの{subject}に段落終端文字がない定義が{count}件あるため、取得可能な本文を「{section}」セクションへ出力します。",
+        "warning.legacyTextboxMissingParagraphEnd.other": "旧Wordの{subject}に段落終端文字がない定義が{count}件あるため、取得可能な本文を「{section}」セクションへ出力します。",
+        "warning.legacyTextboxMetadataInvalid.one": "旧Wordの{subject}に不正な{field}が{count}件あるため、「{section}」セクションへ出力します。",
+        "warning.legacyTextboxMetadataInvalid.other": "旧Wordの{subject}に不正な{field}が{count}件あるため、「{section}」セクションへ出力します。",
+        "warning.legacyTextboxUnsupportedFlags.one": "旧Wordの{subject}に未対応のFTXBXSフラグが{count}件あります。",
+        "warning.legacyTextboxUnsupportedFlags.other": "旧Wordの{subject}に未対応のFTXBXSフラグが{count}件あります。",
+        "warning.legacyTextboxReuseManagement": "旧Wordの{subject}の再利用用管理情報に不整合を検出しました。\n再利用用定義は本文へ出力せず、通常テキストボックスの抽出を継続しました。",
+        "warning.legacyTextboxTextRangeMismatch": "旧Wordの{subject}本文数とPLC範囲が一致しないため、対応不能部分を「{section}」セクションへ出力します。",
+        "warning.legacyTextboxAnchorPlcFallback": "旧Wordの{subject}図形アンカーPLCを解析できないため、「{section}」セクションへ出力します。理由: {message}",
+        "warning.legacyTextboxInvalidAnchorMarker.one": "旧Wordの{subject}が不正なものが{count}件あるため、対応するテキストボックスを「{section}」セクションへ出力しました。",
+        "warning.legacyTextboxInvalidAnchorMarker.other": "旧Wordの{subject}が不正なものが{count}件あるため、対応するテキストボックスを「{section}」セクションへ出力しました。",
+        "warning.legacyTextboxDuplicateAnchor.one": "旧Wordの{subject}図形アンカーに同じshape IDが{count}件重複しているため、最初のアンカーを使用します。",
+        "warning.legacyTextboxDuplicateAnchor.other": "旧Wordの{subject}図形アンカーに同じshape IDが{count}件重複しているため、最初のアンカーを使用します。",
+        "warning.legacyTextboxMissingAnchor.one": "旧Wordの{subject}を図形アンカーへ対応付けられないものが{count}件あるため、「{section}」セクションへ出力します。",
+        "warning.legacyTextboxMissingAnchor.other": "旧Wordの{subject}を図形アンカーへ対応付けられないものが{count}件あるため、「{section}」セクションへ出力します。",
+        "warning.legacyTextboxMissingCoordinate.one": "旧Wordの{subject}図形座標を取得できないアンカーが{count}件あります。CPとshape IDで配置を継続します。",
+        "warning.legacyTextboxMissingCoordinate.other": "旧Wordの{subject}図形座標を取得できないアンカーが{count}件あります。CPとshape IDで配置を継続します。",
+        "warning.legacyTextboxUnplaced.one": "旧Wordの{subject}{count}件を図形アンカーへ配置できなかったため、「{section}」セクションへ出力しました。",
+        "warning.legacyTextboxUnplaced.other": "旧Wordの{subject}{count}件を図形アンカーへ配置できなかったため、「{section}」セクションへ出力しました。",
+        "warning.legacyTextboxUnplacedUnknown": "旧Wordの{subject}の配置を復元できないため、「{section}」セクションへ出力しました。",
+        "warning.legacyPapxRangeMismatch.one": "旧Wordの段落書式ページにBTE範囲との不整合が{count}件あったため、範囲内の段落だけを使用しました。",
+        "warning.legacyPapxRangeMismatch.other": "旧Wordの段落書式ページにBTE範囲との不整合が{count}件あったため、範囲内の段落だけを使用しました。",
+        "warning.legacyPapxFallback": "旧Wordの段落前改ページ情報を解析できないため、手動改ページとセクション区切りだけを使用しました。",
+        "warning.legacyPapxFallbackWithReason": "旧Wordの段落前改ページ情報を解析できないため、手動改ページとセクション区切りだけを使用しました。理由: {message}",
+        "warning.legacyPapxPartial": "旧Wordの段落前改ページ情報の一部を解析できないため、取得できたページ区切り情報だけを使用しました。",
+        "warning.legacyAnnotationIndexMissing": "旧Wordの{subject}参照インデックス {id} に対応する本文が見つかりませんでした。",
+        "warning.legacySectionBoundaryApproximation": "旧Wordのセクション境界に終端文字がないため、取得できたセクション種別からページ位置を近似しました。",
+        "warning.legacyReferenceCharacter": "旧Wordの自動注釈参照位置に参照制御文字がないため、元の本文文字を保持しました。",
+        "warning.legacySectionFallback": "旧Wordのセクション種別を解析できないため、本文中の改ページ文字だけを使用します。理由: {message}",
+        "warning.legacyRemainder": "WordのFIB文字数範囲外にテキストがあり、末尾へ追加しました。",
+        "warning.excelNonWorksheetExcluded": "Worksheet以外のsheetをテキスト抽出から除外しました: {name}",
+        "warning.excelSstOutOfRange": "LabelSstが範囲外のSST indexを参照しています: {name}",
+        "warning.excelShapeTextFailed": "Excel図形内テキストを読み取れませんでした（{name}）: {message}",
+        "warning.powerPointCurrentUserMissing": "Current User streamがないため、最新編集状態の特定を省略しました。",
+        "warning.powerPointHeaderTokenUnknown": "CurrentUserAtomのheader tokenが既知の値ではありません。",
+        "warning.powerPointSlideOrderFallback": "最新Persist Directoryからスライド順を復元できないため、現行Document内の保存順を使用しました。",
+        "warning.powerPointLegacyCodePage": "旧PowerPointの1バイト文字列は日本語コードページとして解析しました。他言語の文書では文字化けする場合があります。",
+        "warning.officeArtMetafileHeader": "OfficeArtメタファイルヘッダーを解析できませんでした。",
+        "warning.officeArtMetafileDecompression": "圧縮OfficeArtメタファイルを展開できませんでした。",
+        "warning.officeArtMetafileSize": "OfficeArtメタファイルの保存サイズが一致しませんでした。",
+        "warning.officeArtBlipLocation": "OfficeArt BLIPのメディア本体位置を特定できませんでした。",
+        "warning.powerPointPicturesMissing": "PowerPoint Pictures streamがありません。",
+        "warning.oleNativeFallback": "Ole10Nativeを元ファイルへ分離できないため、binaryで保存します。",
+        "warning.oleRecordInstanceUnsupported": "ExOleObjStgのrecord instanceが未対応です。",
+        "warning.oleExpandedSizeInvalid": "ExOleObjStgの展開サイズが不正なため読み飛ばしました。",
+        "warning.oleStorageRestoreFailed": "PowerPointの圧縮OLE storageを復元できませんでした。",
+        "warning.packageEntryExtractionFailed": "{subject}「{name}」を抽出できませんでした。\n理由: {message}",
+        "warning.categoryExtractionFailed": "{subject}を抽出できませんでした: {message}",
+        "error.cancelled": "処理を中止しました。",
+        "error.emptyFile": "ファイルは空です。",
+        "error.encrypted": "ファイルは暗号化またはパスワード保護されています。",
+        "error.unsupported": "このファイル形式には対応していません。",
+        "error.format": "拡張子と内部形式が一致しないか、ファイル構造が不正です。",
+        "error.inputSize": "入力ファイルのサイズが安全上限の範囲外です。",
+        "error.memory": "メモリの安全上限を超える可能性があります。入力ファイル数またはファイルサイズを減らして再実行してください。",
+        "error.output": "ZIPの安全上限内で出力を作成できませんでした。",
+        "error.zip": "ZIP構造が不正または未対応です。",
+        "error.word": "Word文書構造が不正または未対応です。",
+        "error.excel": "Excel文書構造が不正または未対応です。",
+        "error.powerpoint": "PowerPoint文書構造が不正または未対応です。",
+        "error.xml": "XMLパーツが大きすぎるか、安全でないか、不正です。",
+        "error.folder": "安全上限内でフォルダを読み取れませんでした。",
+        "error.general": "ファイルを処理できませんでした。",
+        "error.range": "ブラウザで処理できるメモリ量を超えた可能性があります。入力ファイル数またはファイルサイズを減らして再実行してください。",
+        "error.unexpected": "予期しない処理エラーが発生しました。",
+        "error.unexpectedWithMessage": "予期しないエラーが発生しました: {message}",
+        "note.local.heading": "外部送信は行いません",
+        "note.local.body": "Officeファイルはサーバーへ送信されず、現在のブラウザ内だけで処理されます。",
+        "note.caution.heading": "ご利用前の注意",
+        "note.caution.body": "本ツールは元のOfficeファイルを書き換えませんが、すべてのファイルでの正常動作や抽出結果の完全性を保証するものではありません。重要なファイルはバックアップを保管したうえで、利用者自身の判断で使用してください。",
+        "note.legacy.heading": "旧Office形式について",
+        "note.legacy.body": "Office 97～2003形式にも対応しています。新しいOffice形式とは内部構造が異なるため、ファイルの内容や作成環境によっては、取得できる画像やテキストに違いが生じる場合があります。",
+        "note.text.heading": "テキスト抽出の範囲",
+        "note.text.body": "主要な本文、セル、図形内テキスト、表、発表者ノートを抽出します。配置情報をもとに見た目に近い順序へ整えますが、複雑なレイアウトでは画面上の順序と異なる場合があります。",
+        "note.embedded.heading": "埋め込みデータについて",
+        "note.embedded.body": "OLEや添付ファイルの内部データを抽出します。元のファイル形式へ復元できず、.binのまま出力される場合があります。抽出物は実行しないでください。",
+        "note.cancel.heading": "処理中止について",
+        "note.cancel.body": "大きなファイルや複雑な旧Officeファイルでは、中止操作が反映されるまで時間がかかる場合があります。",
+        "footer.ariaLabel": "サイト情報",
+        "footer.copyright": "© 2026 ラクジタワークス（RakuJita Works）",
+        "footer.usageLink": "使い方・注意事項",
+        "footer.termsLink": "利用条件",
+        "footer.trademark": "Microsoft、Microsoft 365、Office、Word、ExcelおよびPowerPointは、Microsoftグループの企業の商標です。",
+        "footer.disclaimer": "本ツールはMicrosoftによって提供、承認、後援されているものではありません。"
+      },
+      en: {
+        "meta.description": "A local browser-based tool that extracts images, text, and embedded data from Word, Excel, and PowerPoint files and packages them into a ZIP file.",
+        "language.label": "Display language",
+        "hero.subtitle": "Extract media and text from Word, Excel, and PowerPoint files in bulk. Everything runs in your browser and is packaged into a single ZIP file.",
+        "hero.localBadge": "Processed locally in your browser · No uploads",
+        "input.heading": "Input files",
+        "button.addFiles": "Add Files",
+        "button.addFolder": "Add Folder",
+        "button.removeSelected": "Remove Selected",
+        "button.clearFiles": "Clear",
+        "button.cancelProcessing": "Cancel Processing",
+        "button.exportZip": "Export All as ZIP",
+        "button.clearLog": "Clear Log",
+        "drop.heading": "Drop files or folders here",
+        "drop.anywhere": "Drop them anywhere on this page to add them",
+        "drop.formats": "Supported formats: .doc / .docx / .docm / .xls / .xlsx / .xlsm / .xltx / .xltm / .ppt / .pptx / .pptm / .potx / .potm",
+        "drop.ariaLabel": "Add Office files. Drop folders here or use the Add Folder button.",
+        "option.includeSubfolders": "Include subfolders when adding a folder",
+        "option.includeText": "Extract text",
+        "option.includeEmbeddings": "Extract embedded data",
+        "warning.browserCompatibility": "This browser cannot decompress ZIP-based OOXML files. Use the current stable version of Chrome or Edge. Legacy .doc, .xls, and .ppt files can still be inspected.",
+        "table.selectAll": "Select all items for removal",
+        "table.selectItem": "Select {name} for removal",
+        "table.selectItemTitle": "Select for removal",
+        "table.fileName": "File name",
+        "table.relativePath": "Relative path",
+        "table.extension": "Extension",
+        "table.size": "Size",
+        "table.status": "Status",
+        "table.empty": "No Office files have been added.",
+        "table.selectionHelp": "The checkboxes are only used to select items for removal. When exporting a ZIP, all processable files in the list are included.",
+        "progress.label": "Processing progress",
+        "progress.waiting": "Waiting",
+        "progress.checkingInternalFormat": "Checking the internal format",
+        "progress.extractingMedia": "Extracting media",
+        "progress.extractingText": "Extracting text",
+        "progress.extractingEmbeddings": "Extracting embedded data",
+        "progress.addingToZip": "Adding files to the ZIP",
+        "progress.readingFile": "{name}: Reading the file",
+        "progress.fileStage": "{name}: {stage}",
+        "progress.fileFinished": "{name}: Processing finished",
+        "progress.completed": "Completed",
+        "progress.generatingZip": "Generating the ZIP",
+        "progress.cancelled": "Processing cancelled",
+        "progress.error": "Processing ended with an error",
+        "log.heading": "Processing Log",
+        "log.level.info": "Info",
+        "log.level.warning": "Warning",
+        "log.level.error": "Error",
+        "log.level.success": "Success",
+        "log.addPrompt": "Add files to begin.",
+        "log.cleared": "The log has been cleared.",
+        "log.zeroByteSkipped": "The file was not added because it is empty: {name}",
+        "log.fileTooLarge": "The file exceeds the input size limit: {name}",
+        "log.totalTooLarge": "The file was not added because the total input size would exceed the safety limit: {name}",
+        "log.filesAdded.one": "{count} file was added.",
+        "log.filesAdded.other": "{count} files were added.",
+        "log.subfoldersSkipped.one": "{count} file in a subfolder was skipped because the option is off.",
+        "log.subfoldersSkipped.other": "{count} files in subfolders were skipped because the option is off.",
+        "log.noFilesAdded": "No files could be added.",
+        "log.noProcessableFiles": "There are no files ready for processing.",
+        "log.fileWarning": "{name}: {warning}",
+        "log.noExtractableContent": "No extractable media, text, or embedded data was found: {name}",
+        "log.fileError": "{message}: {name}",
+        "log.noZipResults": "There are no extracted results to save in a ZIP file.",
+        "log.zipGenerated": "Generated {name} ({success} successful, {empty} with no results, {failed} failed).",
+        "log.cancelled": "Processing was cancelled by the user.",
+        "log.folderReadFailed.one": "{count} folder could not be read by drag and drop. Use Add Folder instead.",
+        "log.folderReadFailed.other": "{count} folders could not be read by drag and drop. Use Add Folder instead.",
+        "log.dropItemsFailed.one": "{count} dropped item could not be read. Use Add Files instead.",
+        "log.dropItemsFailed.other": "{count} dropped items could not be read. Use Add Files instead.",
+        "log.removed.one": "{count} item was removed from the list.",
+        "log.removed.other": "{count} items were removed from the list.",
+        "log.listCleared.one": "{count} item was cleared from the input list.",
+        "log.listCleared.other": "{count} items were cleared from the input list.",
+        "log.cancelRequested": "Cancellation was requested. Processing will stop at the next safe boundary.",
+        "log.dropReadFailed": "The dropped items could not be read: {message}",
+        "log.browserUnsupported": "This browser does not support the Deflate decompression API. Use the current stable version of Chrome or Edge.",
+        "summary.result": "{name} ({media}, {characters}, {embeddings})",
+        "summary.media.one": "{count} media item",
+        "summary.media.other": "{count} media items",
+        "summary.characters.one": "{count} character of text",
+        "summary.characters.other": "{count} characters of text",
+        "summary.embeddings.one": "{count} embedded item",
+        "summary.embeddings.other": "{count} embedded items",
+        "status.ready": "Ready",
+        "status.checking": "Checking",
+        "status.unsupported": "Unsupported format",
+        "status.formatMismatch": "Format mismatch",
+        "status.encrypted": "Possibly encrypted",
+        "status.browserUnsupported": "Unsupported browser",
+        "status.processing": "Processing",
+        "status.completed": "Completed",
+        "status.completedWithWarnings": "Completed with warnings",
+        "status.noResults": "No results",
+        "status.error": "Error",
+        "status.processingFailed": "Error",
+        "status.cancelled": "Cancelled",
+        "status.detail.unsupported": "This file extension is not supported.",
+        "status.detail.formatMismatchOoxml": "The file extension does not match the internal OOXML format.",
+        "status.detail.formatMismatchCfb": "The file extension does not match the internal CFB format.",
+        "status.detail.missingSignature": "The file does not have a ZIP or CFB signature.",
+        "status.detail.ooxml": "OOXML {family}",
+        "status.detail.cfb": "CFB {family}",
+        "status.detail.encryptedOoxml": "This is an encrypted OOXML package.",
+        "status.detail.encryptedLegacy": "The legacy Office binary contains encryption information.",
+        "status.detail.browserUnsupported": "This browser cannot decompress ZIP-based OOXML files.",
+        "status.detail.checking": "Checking the internal format.",
+        "status.detail.processing": "Extracting content from the file.",
+        "status.detail.noResults": "Analysis completed, but there was no content to extract.",
+        "status.detail.completed": "Extraction completed.",
+        "status.detail.completedWithWarnings": "Some extraction steps produced warnings.",
+        "status.detail.cancelled": "Processing was cancelled by the user.",
+        "message.value": "{message}",
+        "warning.textOmitted": "Text output was omitted because the extracted text exceeded the safety limit.",
+        "warning.noText": "No usable document text was found.",
+        "warning.media": "Some media could not be extracted.",
+        "warning.text": "Some text could not be extracted.",
+        "warning.embedded": "Some embedded data could not be extracted.",
+        "warning.word": "Some Word document structures could not be fully reconstructed.",
+        "warning.excel": "Some Excel document structures could not be fully reconstructed.",
+        "warning.powerpoint": "Some PowerPoint document structures could not be fully reconstructed.",
+        "warning.generic": "Some document content could not be fully processed.",
+        "warning.subject.wordChart": "Word chart",
+        "warning.subject.altChunk": "altChunk",
+        "warning.subject.footnote": "footnote",
+        "warning.subject.endnote": "endnote",
+        "warning.subject.legacyFootnote": "legacy Word footnote",
+        "warning.subject.legacyEndnote": "legacy Word endnote",
+        "warning.subject.mainTextbox": "body text box",
+        "warning.subject.headerFooterTextbox": "header/footer text box",
+        "warning.subject.mainShapeAnchor": "body shape-anchor character",
+        "warning.subject.headerFooterShapeAnchor": "header/footer shape-anchor character",
+        "warning.subject.media": "media",
+        "warning.subject.text": "text",
+        "warning.subject.embedding": "embedded data",
+        "warning.document.word": "Word",
+        "warning.document.legacyWord": "legacy Word",
+        "warning.value.empty": "(empty)",
+        "warning.value.noContentType": "no Content Type",
+        "warning.section.unplacedMainTextbox": "Text Boxes Whose Position Could Not Be Reconstructed",
+        "warning.section.unplacedHeaderFooterTextbox": "Header/Footer Text Boxes Whose Position Could Not Be Reconstructed",
+        "warning.referenceMissingId": "The {subject} reference has no relationship ID and was skipped.",
+        "warning.referenceRelationshipMissing": "The relationship for {subject} reference {id} was not found.",
+        "warning.externalReferenceSkipped": "External {subject} reference {id} was skipped for safety.",
+        "warning.referenceKindMismatch": "The relationship type for {subject} reference {id} did not match the expected type.",
+        "warning.partMissing": "The {subject} part was not found: {name}",
+        "warning.unsupportedAltChunk": "An unsupported altChunk format was skipped: {type}",
+        "warning.partParseFailed": "The {subject} part could not be parsed and was skipped: {name}",
+        "warning.annotationDefinitionMissingId": "A {subject} definition had no ID and was skipped.",
+        "warning.annotationDuplicateId": "The {subject} ID {id} is duplicated; the first definition was used.",
+        "warning.annotationBodyMissing": "No body text was found for {subject} reference ID {id}.",
+        "warning.wordNoPageBreak": "The {document} document has no usable page-break information, so its footnotes were placed as if the entire document were one logical page.",
+        "warning.unreferencedAnnotation.one": "There is {count} unreferenced {subject} entry.",
+        "warning.unreferencedAnnotation.other": "There are {count} unreferenced {subject} entries.",
+        "warning.legacyAnnotationEmptyStory": "The legacy Word {subject} reference PLC could not be parsed because no annotation body text was present.",
+        "warning.legacyAnnotationCountMismatch": "The legacy Word {subject} reference count did not match the body count; only matching entries were placed.",
+        "warning.legacyAnnotationPositionFallback": "The positions of legacy Word {subject} references could not be reconstructed, so they were placed in a separate section. Reason: {message}",
+        "warning.legacyTextboxPlcFallback": "The body PLC for the legacy Word {subject} could not be parsed, so its text will be placed in the \"{section}\" section. Reason: {message}",
+        "warning.legacyTextboxInvalidRange.one": "The legacy Word {subject} contains {count} invalid text range, so recoverable text will be placed in the \"{section}\" section.",
+        "warning.legacyTextboxInvalidRange.other": "The legacy Word {subject} contains {count} invalid text ranges, so recoverable text will be placed in the \"{section}\" section.",
+        "warning.legacyTextboxMissingParagraphEnd.one": "The legacy Word {subject} contains {count} definition without a paragraph terminator, so recoverable text will be placed in the \"{section}\" section.",
+        "warning.legacyTextboxMissingParagraphEnd.other": "The legacy Word {subject} contains {count} definitions without paragraph terminators, so recoverable text will be placed in the \"{section}\" section.",
+        "warning.legacyTextboxMetadataInvalid.one": "The legacy Word {subject} contains {count} invalid {field} value, so affected text will be placed in the \"{section}\" section.",
+        "warning.legacyTextboxMetadataInvalid.other": "The legacy Word {subject} contains {count} invalid {field} values, so affected text will be placed in the \"{section}\" section.",
+        "warning.legacyTextboxUnsupportedFlags.one": "The legacy Word {subject} contains {count} unsupported FTXBXS flag value.",
+        "warning.legacyTextboxUnsupportedFlags.other": "The legacy Word {subject} contains {count} unsupported FTXBXS flag values.",
+        "warning.legacyTextboxReuseManagement": "Inconsistent reuse-management information was found for the legacy Word {subject}.\nReusable definitions were not written to the document body, and extraction of ordinary text boxes continued.",
+        "warning.legacyTextboxTextRangeMismatch": "The legacy Word {subject} body count did not match its PLC range, so unmatched text will be placed in the \"{section}\" section.",
+        "warning.legacyTextboxAnchorPlcFallback": "The shape-anchor PLC for the legacy Word {subject} could not be parsed, so its text will be placed in the \"{section}\" section. Reason: {message}",
+        "warning.legacyTextboxInvalidAnchorMarker.one": "The legacy Word document contains {count} invalid {subject}; the corresponding text box was placed in the \"{section}\" section.",
+        "warning.legacyTextboxInvalidAnchorMarker.other": "The legacy Word document contains {count} invalid {subject} values; the corresponding text boxes were placed in the \"{section}\" section.",
+        "warning.legacyTextboxDuplicateAnchor.one": "The shape anchors for the legacy Word {subject} contain {count} duplicate shape ID; the first anchor was used.",
+        "warning.legacyTextboxDuplicateAnchor.other": "The shape anchors for the legacy Word {subject} contain {count} duplicate shape IDs; the first anchor for each ID was used.",
+        "warning.legacyTextboxMissingAnchor.one": "{count} legacy Word {subject} could not be matched to a shape anchor and will be placed in the \"{section}\" section.",
+        "warning.legacyTextboxMissingAnchor.other": "{count} legacy Word {subject} entries could not be matched to shape anchors and will be placed in the \"{section}\" section.",
+        "warning.legacyTextboxMissingCoordinate.one": "Coordinates could not be obtained for {count} legacy Word {subject} shape anchor. Placement continued using CP and shape ID.",
+        "warning.legacyTextboxMissingCoordinate.other": "Coordinates could not be obtained for {count} legacy Word {subject} shape anchors. Placement continued using CP and shape ID.",
+        "warning.legacyTextboxUnplaced.one": "{count} legacy Word {subject} could not be placed at its shape anchor and was placed in the \"{section}\" section.",
+        "warning.legacyTextboxUnplaced.other": "{count} legacy Word {subject} entries could not be placed at their shape anchors and were placed in the \"{section}\" section.",
+        "warning.legacyTextboxUnplacedUnknown": "The position of a legacy Word {subject} could not be reconstructed, so it was placed in the \"{section}\" section.",
+        "warning.legacyPapxRangeMismatch.one": "The legacy Word paragraph-format page contained {count} inconsistency with its BTE range, so only in-range paragraphs were used.",
+        "warning.legacyPapxRangeMismatch.other": "The legacy Word paragraph-format pages contained {count} inconsistencies with their BTE ranges, so only in-range paragraphs were used.",
+        "warning.legacyPapxFallback": "Legacy Word page-break-before information could not be parsed, so only manual page breaks and section breaks were used.",
+        "warning.legacyPapxFallbackWithReason": "Legacy Word page-break-before information could not be parsed, so only manual page breaks and section breaks were used. Reason: {message}",
+        "warning.legacyPapxPartial": "Some legacy Word page-break-before information could not be parsed, so only the available page-break information was used.",
+        "warning.legacyAnnotationIndexMissing": "No body text was found for legacy Word {subject} reference index {id}.",
+        "warning.legacySectionBoundaryApproximation": "A legacy Word section boundary had no terminating character, so the page position was approximated from the available section type.",
+        "warning.legacyReferenceCharacter": "A legacy Word automatic annotation reference had no reference control character, so the original body character was preserved.",
+        "warning.legacySectionFallback": "Legacy Word section types could not be parsed, so only page-break characters in the document body were used. Reason: {message}",
+        "warning.legacyRemainder": "Text was found beyond the Word FIB character-count range and was appended to the end.",
+        "warning.excelNonWorksheetExcluded": "A non-worksheet sheet was excluded from text extraction: {name}",
+        "warning.excelSstOutOfRange": "A LabelSst record referenced an out-of-range SST index: {name}",
+        "warning.excelShapeTextFailed": "Text inside an Excel shape could not be read ({name}): {message}",
+        "warning.powerPointCurrentUserMissing": "The latest editing state could not be determined because the Current User stream was missing.",
+        "warning.powerPointHeaderTokenUnknown": "The CurrentUserAtom header token was not a known value.",
+        "warning.powerPointSlideOrderFallback": "The slide order could not be reconstructed from the latest Persist Directory, so the saved order in the current Document was used.",
+        "warning.powerPointLegacyCodePage": "Single-byte strings in the legacy PowerPoint file were decoded using the Japanese code page. Text may be garbled in documents created for other languages.",
+        "warning.officeArtMetafileHeader": "The OfficeArt metafile header could not be parsed.",
+        "warning.officeArtMetafileDecompression": "The compressed OfficeArt metafile could not be decompressed.",
+        "warning.officeArtMetafileSize": "The stored OfficeArt metafile size did not match the expected size.",
+        "warning.officeArtBlipLocation": "The media payload position in the OfficeArt BLIP could not be determined.",
+        "warning.powerPointPicturesMissing": "The PowerPoint Pictures stream was missing.",
+        "warning.oleNativeFallback": "The Ole10Native payload could not be separated into its original file and was saved as binary data.",
+        "warning.oleRecordInstanceUnsupported": "The ExOleObjStg record instance is unsupported.",
+        "warning.oleExpandedSizeInvalid": "The ExOleObjStg expanded size was invalid, so the record was skipped.",
+        "warning.oleStorageRestoreFailed": "The compressed PowerPoint OLE storage could not be reconstructed.",
+        "warning.packageEntryExtractionFailed": "The {subject} \"{name}\" could not be extracted.\nReason: {message}",
+        "warning.categoryExtractionFailed": "The {subject} could not be extracted: {message}",
+        "error.cancelled": "Processing was cancelled.",
+        "error.emptyFile": "The file is empty.",
+        "error.encrypted": "The file is encrypted or password-protected.",
+        "error.unsupported": "This file format is not supported.",
+        "error.format": "The file extension and internal format do not match, or the file structure is invalid.",
+        "error.inputSize": "The input file size is outside the safety limit.",
+        "error.memory": "The operation would exceed a memory safety limit. Reduce the number or size of the input files and try again.",
+        "error.output": "The output could not be created within the ZIP safety limits.",
+        "error.zip": "The ZIP structure is invalid or unsupported.",
+        "error.word": "The Word document structure is invalid or unsupported.",
+        "error.excel": "The Excel document structure is invalid or unsupported.",
+        "error.powerpoint": "The PowerPoint document structure is invalid or unsupported.",
+        "error.xml": "An XML part is too large, unsafe, or invalid.",
+        "error.folder": "The folder could not be read within the safety limits.",
+        "error.general": "The file could not be processed.",
+        "error.range": "The operation may exceed the memory available to this browser. Reduce the number or size of the input files and try again.",
+        "error.unexpected": "An unexpected processing error occurred.",
+        "error.unexpectedWithMessage": "An unexpected error occurred: {message}",
+        "note.local.heading": "No files are uploaded",
+        "note.local.body": "Office files are not sent to a server. All processing takes place in the current browser.",
+        "note.caution.heading": "Before using this tool",
+        "note.caution.body": "This tool does not modify the original Office files. However, correct operation and complete extraction cannot be guaranteed for every file. Keep backups of important files and use the tool at your own discretion.",
+        "note.legacy.heading": "Legacy Office formats",
+        "note.legacy.body": "Office 97–2003 formats are also supported. Because their internal structure differs from newer Office formats, the images and text that can be extracted may vary depending on the file contents and the environment in which the file was created.",
+        "note.text.heading": "Text extraction coverage",
+        "note.text.body": "The tool extracts primary document text, cells, text inside shapes, tables, and presenter notes. It uses available position information to approximate the visual order, but complex layouts may produce a different order from what appears on screen.",
+        "note.embedded.heading": "Embedded data",
+        "note.embedded.body": "The tool extracts internal data from OLE objects and attached files. Some data cannot be restored to its original file format and may be exported as a .bin file. Do not execute extracted files.",
+        "note.cancel.heading": "Cancelling processing",
+        "note.cancel.body": "For large files or complex legacy Office files, it may take some time for a cancellation request to take effect.",
+        "footer.ariaLabel": "Site information",
+        "footer.copyright": "© 2026 RakuJita Works",
+        "footer.usageLink": "Usage & Notes (Japanese)",
+        "footer.termsLink": "Terms of Use (Japanese)",
+        "footer.trademark": "Microsoft, Microsoft 365, Office, Word, Excel, and PowerPoint are trademarks of the Microsoft group of companies.",
+        "footer.disclaimer": "This tool is not provided, approved, or sponsored by Microsoft."
+      }
+    };
+    var missingTranslationWarnings = Object.create(null);
+
+    function detectInitialLanguage() {
+      var language = "";
+      try {
+        if (navigator.languages && navigator.languages.length > 0) {
+          language = navigator.languages[0];
+        } else {
+          language = navigator.language || navigator.userLanguage || "";
+        }
+      } catch (error) {
+        language = "";
+      }
+      language = String(language).toLowerCase();
+      return language === "ja" || language.indexOf("ja-") === 0 ? "ja" : "en";
+    }
+
+    var currentLanguage = detectInitialLanguage();
+
+    function localeForLanguage(language) {
+      return language === "ja" ? "ja-JP" : "en-US";
+    }
+
+    function translationValue(key, params) {
+      return { translationKey: key, translationParams: params || {} };
+    }
+
+    function pluralValue(baseKey, count) {
+      return { pluralBaseKey: baseKey, count: count };
+    }
+
+    function warningValue(key, params, technicalMessage, pluralCount) {
+      var rawTechnicalMessage = "";
+      var technicalCode = "";
+      var technicalMessageKey = "";
+      var technicalName = "";
+      if (technicalMessage instanceof AppError) {
+        rawTechnicalMessage = technicalMessage.rawMessage;
+        technicalCode = technicalMessage.code;
+        technicalMessageKey = technicalMessage.messageKey;
+        technicalName = technicalMessage.name;
+      } else if (technicalMessage instanceof Error) {
+        rawTechnicalMessage = technicalMessage.message || String(technicalMessage);
+        technicalName = technicalMessage.name || "Error";
+      } else {
+        rawTechnicalMessage = String(technicalMessage || "");
+      }
+      var warning = {
+        key: key,
+        params: params || {}
+      };
+      if (rawTechnicalMessage) {
+        warning.technicalMessage = rawTechnicalMessage;
+        if (technicalCode) {
+          warning.technicalCode = technicalCode;
+        }
+        if (technicalMessageKey) {
+          warning.technicalMessageKey = technicalMessageKey;
+        }
+        if (technicalName) {
+          warning.technicalName = technicalName;
+        }
+      }
+      if (typeof pluralCount === "number") {
+        warning.pluralCount = pluralCount;
+      }
+      return warning;
+    }
+
+    function runtimeWarningValue(warning) {
+      return { runtimeWarning: warning };
+    }
+
+    function numberValue(value) {
+      return { localizedNumber: Number(value || 0) };
+    }
+
+    function translationParameter(value, language) {
+      if (value && value.translationKey) {
+        return t(value.translationKey, value.translationParams, language);
+      }
+      if (value && value.pluralBaseKey) {
+        return t(pluralKey(value.pluralBaseKey, value.count, language), {
+          count: formatNumber(value.count, language)
+        }, language);
+      }
+      if (value && Object.prototype.hasOwnProperty.call(value, "runtimeWarning")) {
+        return localizeRuntimeWarning(value.runtimeWarning, language);
+      }
+      if (value && Object.prototype.hasOwnProperty.call(value, "localizedNumber")) {
+        return formatNumber(value.localizedNumber, language);
+      }
+      if (value instanceof AppError || value instanceof Error) {
+        return friendlyError(value, language);
+      }
+      return String(value === null || typeof value === "undefined" ? "" : value);
+    }
+
+    function t(key, params, language) {
+      var selectedLanguage = language === "ja" || language === "en" ?
+        language : currentLanguage;
+      var selected = TRANSLATIONS[selectedLanguage] || TRANSLATIONS.en;
+      var value = selected[key];
+      if (typeof value !== "string") {
+        value = TRANSLATIONS.ja[key];
+        if (!missingTranslationWarnings[selectedLanguage + ":" + key]) {
+          missingTranslationWarnings[selectedLanguage + ":" + key] = true;
+          if (typeof console !== "undefined" && console.warn) {
+            console.warn("Missing translation: " + selectedLanguage + ":" + key);
+          }
+        }
+      }
+      if (typeof value !== "string") {
+        value = key;
+      }
+      var output = value;
+      var replacements = params || {};
+      var name;
+      for (name in replacements) {
+        if (Object.prototype.hasOwnProperty.call(replacements, name)) {
+          output = output.split("{" + name + "}").join(
+            translationParameter(replacements[name], selectedLanguage)
+          );
+        }
+      }
+      var unresolved = output.match(/\{[A-Za-z][A-Za-z0-9_]*\}/g) || [];
+      var unresolvedIndex;
+      for (unresolvedIndex = 0;
+        unresolvedIndex < unresolved.length;
+        unresolvedIndex += 1) {
+        var warningId = selectedLanguage + ":" + key + ":" +
+          unresolved[unresolvedIndex];
+        if (!missingTranslationWarnings[warningId]) {
+          missingTranslationWarnings[warningId] = true;
+          if (typeof console !== "undefined" && console.warn) {
+            console.warn(
+              "Missing translation parameter: " + warningId
+            );
+          }
+        }
+      }
+      return output;
+    }
+
+    function pluralKey(baseKey, count, language) {
+      return language === "en" && Number(count) === 1 ?
+        baseKey + ".one" : baseKey + ".other";
+    }
+
+    function formatNumber(value, language) {
+      return Number(value || 0).toLocaleString(localeForLanguage(language || currentLanguage));
+    }
+
+    function errorKeyForCode(code) {
+      var value = String(code || "");
+      if (value === "CANCELLED") { return "error.cancelled"; }
+      if (value === "EMPTY_FILE") { return "error.emptyFile"; }
+      if (value === "ENCRYPTED" || value === "ZIP_ENCRYPTED") { return "error.encrypted"; }
+      if (value === "UNSUPPORTED") { return "error.unsupported"; }
+      if (value === "FORMAT_MISMATCH" || value === "FORMAT_SIGNATURE") { return "error.format"; }
+      if (value === "INPUT_SIZE") { return "error.inputSize"; }
+      if (value === "MEMORY" || value === "ESTIMATED_MEMORY") { return "error.memory"; }
+      if (value.indexOf("OUTPUT_") === 0 || value === "NAME_COLLISION") { return "error.output"; }
+      if (value.indexOf("ZIP") === 0 || value === "DEFLATE" || value.indexOf("DEFLATE_") === 0) { return "error.zip"; }
+      if (value.indexOf("WORD_") === 0) { return "error.word"; }
+      if (value.indexOf("BIFF_") === 0 || value.indexOf("EXCEL_") === 0) { return "error.excel"; }
+      if (value.indexOf("PPT_") === 0) { return "error.powerpoint"; }
+      if (value.indexOf("XML_") === 0) { return "error.xml"; }
+      if (value.indexOf("FOLDER_") === 0) { return "error.folder"; }
+      return "error.general";
+    }
+
     function AppError(code, message) {
       this.name = "AppError";
       this.code = code || "GENERAL";
-      this.message = message || "処理中にエラーが発生しました。";
+      this.rawMessage = message || "処理中にエラーが発生しました。";
+      this.messageKey = errorKeyForCode(this.code);
+      this.messageParams = { message: this.rawMessage };
+      this.message = this.rawMessage;
       if (Error.captureStackTrace) {
         Error.captureStackTrace(this, AppError);
       }
@@ -393,7 +1062,7 @@
       if (bytes.length > MAX_TEXT_OUTPUT_BYTES) {
         return {
           omitted: true,
-          warning: "抽出テキストが安全上限を超えたため、テキスト出力を省略しました。"
+          warning: warningValue("warning.textOmitted")
         };
       }
       return {
@@ -1186,8 +1855,11 @@
         value /= 1024;
         unit += 1;
       }
-      return (unit === 0 ? String(Math.round(value)) : value.toFixed(value >= 10 ? 1 : 2)) +
-        " " + units[unit];
+      var digits = unit === 0 ? 0 : (value >= 10 ? 1 : 2);
+      return value.toLocaleString(localeForLanguage(currentLanguage), {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      }) + " " + units[unit];
     }
 
     var CRC_TABLE = (function () {
@@ -2310,11 +2982,17 @@
         } catch (error) {
           throwIfCategoryLimitOrCancelled(error);
           // A damaged package member must not discard earlier successful members.
-          output.warnings.push(
-            (category === "media" ? "メディア" : "埋め込みデータ") +
-              "を抽出できませんでした: " + entry.name +
-              "\n理由: " + friendlyError(error)
-          );
+          output.warnings.push(warningValue(
+            "warning.packageEntryExtractionFailed",
+            {
+              subject: translationValue(
+                category === "media" ?
+                  "warning.subject.media" : "warning.subject.embedding"
+              ),
+              name: entry.name
+            },
+            error
+          ));
         }
         await cooperativeYield(index + 1, 10);
       }
@@ -3737,13 +4415,16 @@
       cache
     ) {
       var id = String(event.value || "");
-      var label = event.kind === "chartReference" ? "Wordグラフ" : "altChunk";
+      var label = translationValue(
+        event.kind === "chartReference" ?
+          "warning.subject.wordChart" : "warning.subject.altChunk"
+      );
       if (!id) {
         addWordExtractionWarning(
           warnings,
           warningSeen,
           "missing-reference-id:" + event.kind + ":" + sourcePart,
-          label + "参照にrelationship IDがないため読み飛ばしました。"
+          warningValue("warning.referenceMissingId", { subject: label })
         );
         return "";
       }
@@ -3753,7 +4434,10 @@
           warnings,
           warningSeen,
           "missing-relationship:" + event.kind + ":" + sourcePart + ":" + id,
-          label + "参照 " + id + " のrelationshipが見つかりませんでした。"
+          warningValue("warning.referenceRelationshipMissing", {
+            subject: label,
+            id: id
+          })
         );
         return "";
       }
@@ -3762,7 +4446,10 @@
           warnings,
           warningSeen,
           "external-relationship:" + event.kind + ":" + sourcePart + ":" + id,
-          "外部" + label + "参照は安全のため読み飛ばしました: " + id
+          warningValue("warning.externalReferenceSkipped", {
+            subject: label,
+            id: id
+          })
         );
         return "";
       }
@@ -3772,7 +4459,10 @@
           warnings,
           warningSeen,
           "unexpected-relationship:" + event.kind + ":" + sourcePart + ":" + id,
-          label + "参照 " + id + " のrelationship種類が一致しませんでした。"
+          warningValue("warning.referenceKindMismatch", {
+            subject: label,
+            id: id
+          })
         );
         return "";
       }
@@ -3781,7 +4471,10 @@
           warnings,
           warningSeen,
           "missing-reference-part:" + event.kind + ":" + relationship.part,
-          label + "パーツが見つかりませんでした: " + relationship.part
+          warningValue("warning.partMissing", {
+            subject: label,
+            name: relationship.part
+          })
         );
         return "";
       }
@@ -3810,8 +4503,10 @@
               warnings,
               warningSeen,
               "unsupported-altchunk:" + relationship.part + ":" + contentType,
-              "未対応のaltChunk形式を読み飛ばしました: " +
-                (contentType || "Content Typeなし")
+              warningValue("warning.unsupportedAltChunk", {
+                type: contentType ||
+                  translationValue("warning.value.noContentType")
+              })
             );
           }
         }
@@ -3824,8 +4519,10 @@
           warnings,
           warningSeen,
           "invalid-reference-part:" + event.kind + ":" + relationship.part,
-          label + "パーツを解析できなかったため読み飛ばしました: " +
-            relationship.part
+          warningValue("warning.partParseFailed", {
+            subject: label,
+            name: relationship.part
+          })
         );
         cache[cacheKey] = "";
         return "";
@@ -3913,7 +4610,13 @@
             warnings,
             warningSeen,
             "missing-part:" + relationshipKindName + ":" + relationship.part,
-            label + "パーツが見つかりませんでした: " + relationship.part
+            warningValue("warning.partMissing", {
+              subject: translationValue(
+                relationshipKindName === "footnotes" ?
+                  "warning.subject.footnote" : "warning.subject.endnote"
+              ),
+              name: relationship.part
+            })
           );
           continue;
         }
@@ -3939,7 +4642,12 @@
               warnings,
               warningSeen,
               "invalid-id:" + relationshipKindName,
-              label + "定義にIDがないため、その定義を読み飛ばしました。"
+              warningValue("warning.annotationDefinitionMissingId", {
+                subject: translationValue(
+                  relationshipKindName === "footnotes" ?
+                    "warning.subject.footnote" : "warning.subject.endnote"
+                )
+              })
             );
             continue;
           }
@@ -3951,7 +4659,13 @@
               warnings,
               warningSeen,
               "duplicate-id:" + relationshipKindName + ":" + id,
-              label + "ID " + id + " が重複しているため、最初の定義を使用しました。"
+              warningValue("warning.annotationDuplicateId", {
+                subject: translationValue(
+                  relationshipKindName === "footnotes" ?
+                    "warning.subject.footnote" : "warning.subject.endnote"
+                ),
+                id: id
+              })
             );
             continue;
           }
@@ -4057,14 +4771,19 @@
         var seen = event.kind === "footnoteReference" ?
           seenFootnotes :
           seenEndnotes;
-        var label = event.kind === "footnoteReference" ? "脚注" : "文末脚注";
+        var label = translationValue(
+          event.kind === "footnoteReference" ?
+            "warning.subject.footnote" : "warning.subject.endnote"
+        );
         if (!id || !Object.prototype.hasOwnProperty.call(definitions.byId, id)) {
           addWordExtractionWarning(
             warnings,
             warningSeen,
             "missing-definition:" + event.kind + ":" + id,
-            label + "参照ID " + (id || "（空）") +
-              " に対応する本文が見つかりませんでした。"
+            warningValue("warning.annotationBodyMissing", {
+              subject: label,
+              id: id || translationValue("warning.value.empty")
+            })
           );
           return;
         }
@@ -4137,8 +4856,9 @@
           warnings,
           warningSeen,
           "no-page-break:ooxml",
-          "Word文書に利用可能なページ区切り情報がないため、" +
-            "文書全体を1つの論理ページとして脚注を配置しました。"
+          warningValue("warning.wordNoPageBreak", {
+            document: translationValue("warning.document.word")
+          })
         );
       }
 
@@ -4272,7 +4992,12 @@
           outputWarnings,
           warningSeen,
           "unreferenced:footnotes",
-          "未参照の脚注が" + unreferencedFootnotes.length + "件あります。"
+          warningValue(
+            "warning.unreferencedAnnotation",
+            { subject: translationValue("warning.subject.footnote") },
+            "",
+            unreferencedFootnotes.length
+          )
         );
         sections.push(
           "===== 未参照の脚注 =====\n" +
@@ -4297,7 +5022,12 @@
           outputWarnings,
           warningSeen,
           "unreferenced:endnotes",
-          "未参照の文末脚注が" + unreferencedEndnoteCount + "件あります。"
+          warningValue(
+            "warning.unreferencedAnnotation",
+            { subject: translationValue("warning.subject.endnote") },
+            "",
+            unreferencedEndnoteCount
+          )
         );
       }
       if (endnotes.length) {
@@ -5787,7 +6517,10 @@
       warningSeen
     ) {
       var isFootnote = kind === "footnote";
-      var label = isFootnote ? "脚注" : "文末脚注";
+      var label = translationValue(
+        isFootnote ?
+          "warning.subject.footnote" : "warning.subject.endnote"
+      );
       var referencePair = fib.fcLcb[
         isFootnote ? "plcffndRef" : "plcfendRef"
       ];
@@ -5814,7 +6547,9 @@
               warnings,
               warningSeen,
               "legacy-empty-story-reference:" + kind,
-              "旧Wordの" + label + "本文がない状態で参照PLCを解析できませんでした。"
+              warningValue("warning.legacyAnnotationEmptyStory", {
+                subject: label
+              })
             );
           }
         }
@@ -5836,8 +6571,9 @@
             warnings,
             warningSeen,
             "legacy-count-mismatch:" + kind,
-            "旧Wordの" + label + "参照数と本文数が一致しないため、" +
-              "対応できる範囲だけを配置します。"
+            warningValue("warning.legacyAnnotationCountMismatch", {
+              subject: label
+            })
           );
         }
         return {
@@ -5856,8 +6592,11 @@
           warnings,
           warningSeen,
           "legacy-plc-fallback:" + kind,
-          "旧Wordの" + label + "参照位置を復元できないため、" +
-            "独立セクションへ出力します。理由: " + friendlyError(error)
+          warningValue(
+            "warning.legacyAnnotationPositionFallback",
+            { subject: label },
+            error
+          )
         );
         return {
           usable: false,
@@ -6215,9 +6954,16 @@
       warningSeen
     ) {
       var isHeader = source === "header";
-      var sourceLabel = isHeader ?
-        "ヘッダー／フッター内テキストボックス" :
-        "本文テキストボックス";
+      var sourceLabel = translationValue(
+        isHeader ?
+          "warning.subject.headerFooterTextbox" :
+          "warning.subject.mainTextbox"
+      );
+      var sectionLabel = translationValue(
+        isHeader ?
+          "warning.section.unplacedHeaderFooterTextbox" :
+          "warning.section.unplacedMainTextbox"
+      );
       if (!story.count) {
         return emptyLegacyWordTextboxSet();
       }
@@ -6242,8 +6988,11 @@
           warnings,
           warningSeen,
           "legacy-textbox-text-fallback:" + source,
-          "旧Wordの" + sourceLabel + "本文PLCを解析できないため、" +
-            "救済セクションへ出力します。理由: " + friendlyError(error)
+          warningValue(
+            "warning.legacyTextboxPlcFallback",
+            { subject: sourceLabel, section: sectionLabel },
+            error
+          )
         );
         return {
           usable: false,
@@ -6259,9 +7008,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-invalid-range:" + source,
-          "旧Wordの" + sourceLabel + "に不正なテキスト範囲が" +
-            validationCounts.invalidRange + "件あるため、取得可能な本文を" +
-            "救済セクションへ出力します。"
+          warningValue(
+            "warning.legacyTextboxInvalidRange",
+            { subject: sourceLabel, section: sectionLabel },
+            "",
+            validationCounts.invalidRange
+          )
         );
       }
       if (validationCounts.missingParagraphEnd) {
@@ -6269,9 +7021,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-missing-paragraph-end:" + source,
-          "旧Wordの" + sourceLabel + "に段落終端文字がない定義が" +
-            validationCounts.missingParagraphEnd + "件あるため、取得可能な本文を" +
-            "救済セクションへ出力します。"
+          warningValue(
+            "warning.legacyTextboxMissingParagraphEnd",
+            { subject: sourceLabel, section: sectionLabel },
+            "",
+            validationCounts.missingParagraphEnd
+          )
         );
       }
       if (validationCounts.invalidLid) {
@@ -6279,8 +7034,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-invalid-lid:" + source,
-          "旧Wordの" + sourceLabel + "に不正なlidが" +
-            validationCounts.invalidLid + "件あるため、救済セクションへ出力します。"
+          warningValue(
+            "warning.legacyTextboxMetadataInvalid",
+            { subject: sourceLabel, section: sectionLabel, field: "lid" },
+            "",
+            validationCounts.invalidLid
+          )
         );
       }
       if (validationCounts.invalidChainCount) {
@@ -6288,9 +7047,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-invalid-chain:" + source,
-          "旧Wordの" + sourceLabel + "に不正なcTxbxが" +
-            validationCounts.invalidChainCount +
-            "件あるため、救済セクションへ出力します。"
+          warningValue(
+            "warning.legacyTextboxMetadataInvalid",
+            { subject: sourceLabel, section: sectionLabel, field: "cTxbx" },
+            "",
+            validationCounts.invalidChainCount
+          )
         );
       }
       if (validationCounts.invalidEditCount) {
@@ -6298,9 +7060,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-invalid-edit:" + source,
-          "旧Wordの" + sourceLabel + "に不正なcTxbxEditが" +
-            validationCounts.invalidEditCount +
-            "件あるため、救済セクションへ出力します。"
+          warningValue(
+            "warning.legacyTextboxMetadataInvalid",
+            { subject: sourceLabel, section: sectionLabel, field: "cTxbxEdit" },
+            "",
+            validationCounts.invalidEditCount
+          )
         );
       }
       if (validationCounts.invalidUndoId) {
@@ -6308,9 +7073,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-invalid-undo:" + source,
-          "旧Wordの" + sourceLabel + "に不正なtxidUndoが" +
-            validationCounts.invalidUndoId +
-            "件あるため、救済セクションへ出力します。"
+          warningValue(
+            "warning.legacyTextboxMetadataInvalid",
+            { subject: sourceLabel, section: sectionLabel, field: "txidUndo" },
+            "",
+            validationCounts.invalidUndoId
+          )
         );
       }
       if (validationCounts.unsupportedFlags) {
@@ -6318,8 +7086,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-unsupported-flags:" + source,
-          "旧Wordの" + sourceLabel + "に未対応のFTXBXSフラグが" +
-            validationCounts.unsupportedFlags + "件あります。"
+          warningValue(
+            "warning.legacyTextboxUnsupportedFlags",
+            { subject: sourceLabel },
+            "",
+            validationCounts.unsupportedFlags
+          )
         );
       }
       var hasInvalidReuseManagement = !!(
@@ -6336,8 +7108,9 @@
           warnings,
           warningSeen,
           "legacy-textbox-invalid-reuse-management:" + source,
-          "旧Wordの" + sourceLabel + "の再利用用管理情報に不整合を検出しました。\n" +
-            "再利用用定義は本文へ出力せず、通常テキストボックスの抽出を継続しました。"
+          warningValue("warning.legacyTextboxReuseManagement", {
+            subject: sourceLabel
+          })
         );
       }
 
@@ -6363,8 +7136,10 @@
           warnings,
           warningSeen,
           "legacy-textbox-text-range:" + source,
-          "旧Wordの" + sourceLabel + "本文数とPLC範囲が一致しないため、" +
-            "対応不能部分を救済セクションへ出力します。"
+          warningValue("warning.legacyTextboxTextRangeMismatch", {
+            subject: sourceLabel,
+            section: sectionLabel
+          })
         );
       }
 
@@ -6392,8 +7167,11 @@
           warnings,
           warningSeen,
           "legacy-textbox-anchor-fallback:" + source,
-          "旧Wordの" + sourceLabel + "図形アンカーPLCを解析できないため、" +
-            "救済セクションへ出力します。理由: " + friendlyError(error)
+          warningValue(
+            "warning.legacyTextboxAnchorPlcFallback",
+            { subject: sourceLabel, section: sectionLabel },
+            error
+          )
         );
         return {
           usable: false,
@@ -6441,11 +7219,19 @@
           warnings,
           warningSeen,
           "legacy-textbox-invalid-anchor-marker:" + source,
-          "旧Wordの" + (isHeader ?
-            "ヘッダー／フッター図形アンカー文字" :
-            "本文図形アンカー文字") +
-            "が不正なものが" + invalidMarkerCount +
-            "件あるため、対応するテキストボックスを救済セクションへ出力しました。"
+          warningValue(
+            "warning.legacyTextboxInvalidAnchorMarker",
+            {
+              subject: translationValue(
+                isHeader ?
+                  "warning.subject.headerFooterShapeAnchor" :
+                  "warning.subject.mainShapeAnchor"
+              ),
+              section: sectionLabel
+            },
+            "",
+            invalidMarkerCount
+          )
         );
       }
       if (duplicateAnchorCount) {
@@ -6453,8 +7239,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-duplicate-anchor:" + source,
-          "旧Wordの" + sourceLabel + "図形アンカーに同じshape IDが" +
-            duplicateAnchorCount + "件重複しているため、最初のアンカーを使用します。"
+          warningValue(
+            "warning.legacyTextboxDuplicateAnchor",
+            { subject: sourceLabel },
+            "",
+            duplicateAnchorCount
+          )
         );
       }
 
@@ -6503,8 +7293,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-missing-anchor:" + source,
-          "旧Wordの" + sourceLabel + "を図形アンカーへ対応付けられないものが" +
-            missingAnchorCount + "件あるため、救済セクションへ出力します。"
+          warningValue(
+            "warning.legacyTextboxMissingAnchor",
+            { subject: sourceLabel, section: sectionLabel },
+            "",
+            missingAnchorCount
+          )
         );
       }
       if (missingCoordinateCount) {
@@ -6512,8 +7306,12 @@
           warnings,
           warningSeen,
           "legacy-textbox-coordinate:" + source,
-          "旧Wordの" + sourceLabel + "図形座標を取得できないアンカーが" +
-            missingCoordinateCount + "件あります。CPとshape IDで配置を継続します。"
+          warningValue(
+            "warning.legacyTextboxMissingCoordinate",
+            { subject: sourceLabel },
+            "",
+            missingCoordinateCount
+          )
         );
       }
 
@@ -7174,9 +7972,12 @@
           warnings,
           warningSeen,
           "legacy-papx-bte-range",
-          "旧Wordの段落書式ページにBTE範囲との不整合が" +
-            (disjointBteCount + outOfRangeParagraphCount) +
-            "件あったため、範囲内の段落だけを使用しました。"
+          warningValue(
+            "warning.legacyPapxRangeMismatch",
+            null,
+            "",
+            disjointBteCount + outOfRangeParagraphCount
+          )
         );
       }
       if (entries.length &&
@@ -7186,16 +7987,14 @@
           warnings,
           warningSeen,
           "legacy-papx-fallback",
-          "旧Wordの段落前改ページ情報を解析できないため、" +
-            "手動改ページとセクション区切りだけを使用しました。"
+          warningValue("warning.legacyPapxFallback")
         );
       } else if (partialErrorCount || unmappedCount) {
         addWordExtractionWarning(
           warnings,
           warningSeen,
           "legacy-papx-partial",
-          "旧Wordの段落前改ページ情報の一部を解析できないため、" +
-            "取得できたページ区切り情報だけを使用しました。"
+          warningValue("warning.legacyPapxPartial")
         );
       }
       return pageBreakCps;
@@ -7394,8 +8193,13 @@
             warningSeen,
             "legacy-missing-definition:" +
               (isFootnote ? "footnote:" : "endnote:") + key,
-            "旧Wordの" + (isFootnote ? "脚注" : "文末脚注") +
-              "参照インデックス " + key + " に対応する本文が見つかりませんでした。"
+            warningValue("warning.legacyAnnotationIndexMissing", {
+              subject: translationValue(
+                isFootnote ?
+                  "warning.subject.footnote" : "warning.subject.endnote"
+              ),
+              id: key
+            })
           );
           return;
         }
@@ -7421,8 +8225,7 @@
             warnings,
             warningSeen,
             "legacy-section-without-marker",
-            "旧Wordのセクション境界に終端文字がないため、" +
-              "取得できたセクション種別からページ位置を近似しました。"
+            warningValue("warning.legacySectionBoundaryApproximation")
           );
           if (boundaryKind >= 2) {
             finishPageAtCp(cp);
@@ -7456,8 +8259,7 @@
             warnings,
             warningSeen,
             "legacy-reference-character",
-            "旧Wordの自動注釈参照位置に参照制御文字がないため、" +
-              "元の本文文字を保持しました。"
+            warningValue("warning.legacyReferenceCharacter")
           );
         }
 
@@ -7491,8 +8293,9 @@
           warnings,
           warningSeen,
           "no-page-break:legacy",
-          "旧Word文書に利用可能なページ区切り情報がないため、" +
-            "文書全体を1つの論理ページとして脚注を配置しました。"
+          warningValue("warning.wordNoPageBreak", {
+            document: translationValue("warning.document.legacyWord")
+          })
         );
       }
 
@@ -7607,9 +8410,11 @@
           outputWarnings,
           warningSeen,
           "legacy-section-fallback",
-          "旧Wordのセクション種別を解析できないため、" +
-            "本文中の改ページ文字だけを使用します。理由: " +
-            friendlyError(error)
+          warningValue(
+            "warning.legacySectionFallback",
+            null,
+            error
+          )
         );
         sectionInfo = {
           available: false,
@@ -7633,9 +8438,11 @@
           outputWarnings,
           warningSeen,
           "legacy-papx-fallback",
-          "旧Wordの段落前改ページ情報を解析できないため、" +
-            "手動改ページとセクション区切りだけを使用しました。理由: " +
-            friendlyError(error)
+          warningValue(
+            "warning.legacyPapxFallbackWithReason",
+            null,
+            error
+          )
         );
         paragraphPageBreakCps = Object.create(null);
       }
@@ -7675,7 +8482,7 @@
             outputWarnings,
             warningSeen,
             "legacy-remainder",
-            "WordのFIB文字数範囲外にテキストがあり、末尾へ追加しました。"
+            warningValue("warning.legacyRemainder")
           );
           sections.push("===== その他のテキスト =====\n" + remainder);
         }
@@ -7691,11 +8498,23 @@
           warningSeen,
           "legacy-textbox-output:main",
           mainUnplacedCount ?
-            "旧Wordの本文テキストボックス" + mainUnplacedCount +
-              "件を図形アンカーへ配置できなかったため、" +
-              "救済セクションへ出力しました。" :
-            "旧Wordの本文テキストボックスの配置を復元できないため、" +
-              "救済セクションへ出力しました。"
+            warningValue(
+              "warning.legacyTextboxUnplaced",
+              {
+                subject: translationValue("warning.subject.mainTextbox"),
+                section: translationValue(
+                  "warning.section.unplacedMainTextbox"
+                )
+              },
+              "",
+              mainUnplacedCount
+            ) :
+            warningValue("warning.legacyTextboxUnplacedUnknown", {
+              subject: translationValue("warning.subject.mainTextbox"),
+              section: translationValue(
+                "warning.section.unplacedMainTextbox"
+              )
+            })
         );
         sections.push(
           "===== 配置を復元できないテキストボックス =====\n" +
@@ -7713,11 +8532,27 @@
           warningSeen,
           "legacy-textbox-output:header",
           headerUnplacedCount ?
-            "旧Wordのヘッダー／フッター内テキストボックス" +
-              headerUnplacedCount + "件を図形アンカーへ配置できなかったため、" +
-              "救済セクションへ出力しました。" :
-            "旧Wordのヘッダー／フッター内テキストボックスの配置を" +
-              "復元できないため、救済セクションへ出力しました。"
+            warningValue(
+              "warning.legacyTextboxUnplaced",
+              {
+                subject: translationValue(
+                  "warning.subject.headerFooterTextbox"
+                ),
+                section: translationValue(
+                  "warning.section.unplacedHeaderFooterTextbox"
+                )
+              },
+              "",
+              headerUnplacedCount
+            ) :
+            warningValue("warning.legacyTextboxUnplacedUnknown", {
+              subject: translationValue(
+                "warning.subject.headerFooterTextbox"
+              ),
+              section: translationValue(
+                "warning.section.unplacedHeaderFooterTextbox"
+              )
+            })
         );
         sections.push(
           "===== 配置を復元できないヘッダー／フッター内テキストボックス =====\n" +
@@ -7743,7 +8578,14 @@
             outputWarnings,
             warningSeen,
             "legacy-unreferenced:footnotes",
-            "未参照の旧Word脚注が" + unreferencedFootnotes.length + "件あります。"
+            warningValue(
+              "warning.unreferencedAnnotation",
+              {
+                subject: translationValue("warning.subject.legacyFootnote")
+              },
+              "",
+              unreferencedFootnotes.length
+            )
           );
           sections.push(
             "===== 未参照の脚注 =====\n" +
@@ -7772,8 +8614,14 @@
             outputWarnings,
             warningSeen,
             "legacy-unreferenced:endnotes",
-            "未参照の旧Word文末脚注が" +
-              unreferencedEndnoteCount + "件あります。"
+            warningValue(
+              "warning.unreferencedAnnotation",
+              {
+                subject: translationValue("warning.subject.legacyEndnote")
+              },
+              "",
+              unreferencedEndnoteCount
+            )
           );
         }
         if (renderedEndnotes.length) {
@@ -8101,7 +8949,10 @@
       ensure(sheets.length > 0, "BIFF_SHEETS", "BoundSheet8がありません。");
       sheets = sheets.filter(function (sheet) {
         if (sheet.type !== 0x00) {
-          warnings.push("Worksheet以外のsheetをテキスト抽出から除外しました: " + sheet.name);
+          warnings.push(warningValue(
+            "warning.excelNonWorksheetExcluded",
+            { name: sheet.name }
+          ));
           return false;
         }
         ensure(sheet.offset < bytes.length, "BIFF_SHEET_OFFSET",
@@ -8161,7 +9012,10 @@
             if (sstIndex < sst.length) {
               cells.push({ row: row, column: column, xf: xf, value: sst[sstIndex], formula: "" });
             } else {
-              warnings.push("LabelSstが範囲外のSST indexを参照しています: " + sheet.name);
+              warnings.push(warningValue(
+                "warning.excelSstOutOfRange",
+                { name: sheet.name }
+              ));
             }
           } else if (cellRecord.id === 0x0203 && data.length >= 14) {
             cells.push({
@@ -8244,10 +9098,11 @@
                 shapeTexts.push(shapeText);
               }
             } catch (error) {
-              warnings.push(
-                "Excel図形内テキストを読み取れませんでした（" +
-                sheet.name + "）: " + friendlyError(error)
-              );
+              warnings.push(warningValue(
+                "warning.excelShapeTextFailed",
+                { name: sheet.name },
+                error
+              ));
             }
           }
         }
@@ -8393,7 +9248,7 @@
         edits: []
       };
       if (!currentUserBytes || currentUserBytes.length < 20) {
-        warnings.push("Current User streamがないため、最新編集状態の特定を省略しました。");
+        warnings.push(warningValue("warning.powerPointCurrentUserMissing"));
         return state;
       }
       var currentUserRecord = pptRecordAt(currentUserBytes, 0, currentUserBytes.length);
@@ -8405,7 +9260,7 @@
         return state;
       }
       if (headerToken !== 0xE391C05F) {
-        warnings.push("CurrentUserAtomのheader tokenが既知の値ではありません。");
+        warnings.push(warningValue("warning.powerPointHeaderTokenUnknown"));
       }
       var currentEditOffset = u32(currentUserBytes, 16);
       var seenEdits = Object.create(null);
@@ -8778,9 +9633,7 @@
           sections.push(section);
         });
       } else {
-        warnings.push(
-          "最新Persist Directoryからスライド順を復元できないため、現行Document内の保存順を使用しました。"
-        );
+        warnings.push(warningValue("warning.powerPointSlideOrderFallback"));
         if (!documentRecord) {
           var topLevel = parsePptSequence(powerPointBytes, 0, powerPointBytes.length, 0);
           var documentCandidates = recordsOfType(topLevel, PPT_RECORD.DOCUMENT);
@@ -8815,10 +9668,7 @@
         }
       }
       if (textState.usedTextBytes) {
-        warnings.push(
-          "旧PowerPointの1バイト文字列は日本語コードページとして解析しました。" +
-          "他言語の文書では文字化けする場合があります。"
-        );
+        warnings.push(warningValue("warning.powerPointLegacyCodePage"));
       }
       return sections.join("\n\n");
     }
@@ -9006,7 +9856,7 @@
           }
         }
         if (!choice) {
-          warnings.push("OfficeArtメタファイルヘッダーを解析できませんでした。");
+          warnings.push(warningValue("warning.officeArtMetafileHeader"));
           return null;
         }
         var data = payload.subarray(
@@ -9018,12 +9868,14 @@
             data = await decompressBytes(data, "deflate", choice.uncompressedSize);
           } catch (error) {
             throwIfCancelled(error);
-            warnings.push("圧縮OfficeArtメタファイルを展開できませんでした。");
+            warnings.push(warningValue(
+              "warning.officeArtMetafileDecompression"
+            ));
             return null;
           }
         } else if (choice.uncompressedSize &&
           data.length !== choice.uncompressedSize) {
-          warnings.push("OfficeArtメタファイルの保存サイズが一致しませんでした。");
+          warnings.push(warningValue("warning.officeArtMetafileSize"));
           return null;
         }
         return { extension: info.extension, data: data };
@@ -9054,7 +9906,7 @@
           }
         }
       }
-      warnings.push("OfficeArt BLIPのメディア本体位置を特定できませんでした。");
+      warnings.push(warningValue("warning.officeArtBlipLocation"));
       return null;
     }
 
@@ -9112,7 +9964,7 @@
         if (picturesEntry) {
           sources.push(cfb.getStream(picturesEntry));
         } else {
-          warnings.push("PowerPoint Pictures streamがありません。");
+          warnings.push(warningValue("warning.powerPointPicturesMissing"));
         }
       }
       return sources;
@@ -9249,7 +10101,7 @@
             handledEntries[entry.id] = true;
           } catch (error) {
             throwIfCategoryLimitOrCancelled(error);
-            warnings.push("Ole10Nativeを元ファイルへ分離できないため、binaryで保存します。");
+            warnings.push(warningValue("warning.oleNativeFallback"));
             pushLimitedEmbedding(output, {
               name: allocator.allocate("embedding.bin", true),
               data: cfb.getStream(entry)
@@ -9304,13 +10156,15 @@
             continue;
           }
           if (record.instance !== 1 || record.length <= 4) {
-            warnings.push("ExOleObjStgのrecord instanceが未対応です。");
+            warnings.push(warningValue(
+              "warning.oleRecordInstanceUnsupported"
+            ));
             continue;
           }
           var expectedSize = u32(powerPointBytes, record.payloadStart);
           var compressed = powerPointBytes.subarray(record.payloadStart + 4, record.end);
           if (expectedSize === 0 || expectedSize > 0x7FFFFFFF) {
-            warnings.push("ExOleObjStgの展開サイズが不正なため読み飛ばしました。");
+            warnings.push(warningValue("warning.oleExpandedSizeInvalid"));
             continue;
           }
           try {
@@ -9322,7 +10176,7 @@
             });
           } catch (error) {
             throwIfCategoryLimitOrCancelled(error);
-            warnings.push("PowerPointの圧縮OLE storageを復元できませんでした。");
+            warnings.push(warningValue("warning.oleStorageRestoreFailed"));
           }
         }
       }
@@ -9385,6 +10239,8 @@
     }
 
     var ui = {
+      languageJa: document.getElementById("language-ja"),
+      languageEn: document.getElementById("language-en"),
       addFiles: document.getElementById("add-files"),
       addFolder: document.getElementById("add-folder"),
       removeSelected: document.getElementById("remove-selected"),
@@ -9416,8 +10272,21 @@
       inspecting: 0,
       inspectionQueue: Promise.resolve(),
       lastProgress: 0,
+      progress: {
+        completed: 0,
+        total: 0,
+        percentage: 0,
+        key: "progress.waiting",
+        params: {}
+      },
       logStarted: false,
-      logLines: ["[情報] ファイルを追加してください。"],
+      logEntries: [{
+        level: "info",
+        key: "log.addPrompt",
+        params: {},
+        pluralCount: null,
+        renderedLineCount: 1
+      }],
       logNodes: ui.log.firstChild ? [ui.log.firstChild] : [],
       logDomDirty: false,
       cancelRequested: false,
@@ -9501,13 +10370,35 @@
       try {
         ui.log.textContent = "";
         appState.logNodes = [];
-        var index;
-        for (index = 0; index < appState.logLines.length; index += 1) {
-          var node = document.createTextNode(
-            (index > 0 ? "\n" : "") + appState.logLines[index]
-          );
-          ui.log.appendChild(node);
-          appState.logNodes.push(node);
+        var entryIndex;
+        var renderedEntries = [];
+        var totalLines = 0;
+        for (entryIndex = 0;
+          entryIndex < appState.logEntries.length;
+          entryIndex += 1) {
+          var entry = appState.logEntries[entryIndex];
+          var lines = formatLogEntryLines(entry, currentLanguage);
+          entry.renderedLineCount = lines.length;
+          renderedEntries.push(lines);
+          totalLines += lines.length;
+        }
+        while (totalLines > MAX_LOG_LINES && appState.logEntries.length > 1) {
+          var removedEntry = appState.logEntries.shift();
+          renderedEntries.shift();
+          totalLines -= removedEntry.renderedLineCount;
+        }
+        for (entryIndex = 0;
+          entryIndex < renderedEntries.length;
+          entryIndex += 1) {
+          lines = renderedEntries[entryIndex];
+          var lineIndex;
+          for (lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+            var node = document.createTextNode(
+              (appState.logNodes.length ? "\n" : "") + lines[lineIndex]
+            );
+            ui.log.appendChild(node);
+            appState.logNodes.push(node);
+          }
         }
         appState.logDomDirty = false;
       } catch (error) {
@@ -9515,25 +10406,50 @@
       }
     }
 
-    function logMessage(level, message) {
-      var labels = {
-        ok: "OK",
-        warning: "注意",
-        error: "エラー",
-        info: "情報"
-      };
-      var messageLines = String(message || "").replace(/\r\n?/g, "\n").split("\n");
+    function formatLogEntryLines(entry, language) {
+      var params = {};
+      var name;
+      for (name in entry.params) {
+        if (Object.prototype.hasOwnProperty.call(entry.params, name)) {
+          params[name] = entry.params[name];
+        }
+      }
+      var messageKey = entry.key;
+      if (typeof entry.pluralCount === "number") {
+        messageKey = pluralKey(entry.key, entry.pluralCount, language);
+        params.count = formatNumber(entry.pluralCount, language);
+      }
+      var messageLines = t(messageKey, params, language)
+        .replace(/\r\n?/g, "\n")
+        .split("\n");
+      var levelKey = entry.level === "ok" ? "success" : entry.level;
+      if (levelKey !== "warning" && levelKey !== "error" &&
+        levelKey !== "success") {
+        levelKey = "info";
+      }
+      var label = t("log.level." + levelKey, null, language);
       var lines = [];
       var lineIndex;
       for (lineIndex = 0; lineIndex < messageLines.length; lineIndex += 1) {
         lines.push(
           (lineIndex === 0 ?
-            "[" + (labels[level] || labels.info) + "] " :
+            "[" + label + "] " :
             "  ") + messageLines[lineIndex]
         );
       }
+      return lines;
+    }
+
+    function logMessage(level, key, params, pluralCount) {
+      var entry = {
+        level: level,
+        key: key,
+        params: params || {},
+        pluralCount: typeof pluralCount === "number" ? pluralCount : null,
+        renderedLineCount: 0
+      };
       if (!appState.logStarted) {
-        appState.logLines = [];
+        appState.logEntries = [];
         appState.logNodes = [];
         appState.logStarted = true;
         try {
@@ -9542,13 +10458,15 @@
           appState.logDomDirty = true;
         }
       }
-      for (lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
-        appState.logLines.push(lines[lineIndex]);
-      }
+      var lines = formatLogEntryLines(entry, currentLanguage);
+      entry.renderedLineCount = lines.length;
+      appState.logEntries.push(entry);
+      var totalLines = appState.logNodes.length + lines.length;
       var removedCount = 0;
-      while (appState.logLines.length > MAX_LOG_LINES) {
-        appState.logLines.shift();
-        removedCount += 1;
+      while (totalLines > MAX_LOG_LINES && appState.logEntries.length > 1) {
+        var removedEntry = appState.logEntries.shift();
+        totalLines -= removedEntry.renderedLineCount;
+        removedCount += removedEntry.renderedLineCount;
       }
       try {
         // Keep normal updates incremental; full rendering is only a failure fallback.
@@ -9565,6 +10483,7 @@
             appState.logNodes[0].nodeValue.replace(/^\n/, "");
         }
         if (!appState.logDomDirty) {
+          var lineIndex;
           for (lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
             var node = document.createTextNode(
               (appState.logNodes.length ? "\n" : "") + lines[lineIndex]
@@ -9577,33 +10496,186 @@
         appState.logDomDirty = true;
       }
       if (appState.logDomDirty ||
-        appState.logNodes.length !== appState.logLines.length) {
+        appState.logNodes.length !== totalLines) {
         renderLogLines();
       }
       ui.log.scrollTop = ui.log.scrollHeight;
     }
 
-    function friendlyError(error) {
-      if (error instanceof AppError) {
-        return error.message;
+    function localizeRuntimeWarning(message, language) {
+      var selectedLanguage = language === "ja" || language === "en" ?
+        language : currentLanguage;
+      if (message && typeof message.key === "string") {
+        var params = {};
+        var name;
+        for (name in message.params) {
+          if (Object.prototype.hasOwnProperty.call(message.params, name)) {
+            params[name] = message.params[name];
+          }
+        }
+        if (message.technicalMessage &&
+          !Object.prototype.hasOwnProperty.call(params, "message")) {
+          params.message = localizeWarningTechnicalMessage(
+            message,
+            selectedLanguage
+          );
+        }
+        var messageKey = message.key;
+        if (typeof message.pluralCount === "number") {
+          messageKey = pluralKey(
+            message.key,
+            message.pluralCount,
+            selectedLanguage
+          );
+          params.count = formatNumber(message.pluralCount, selectedLanguage);
+        }
+        return t(messageKey, params, selectedLanguage);
       }
-      if (error && error.name === "RangeError") {
-        return "ブラウザで処理できるメモリ量を超えた可能性があります。" +
-          "入力ファイル数またはファイルサイズを減らして再実行してください。";
+      var raw = String(message || "");
+      if (selectedLanguage === "ja") {
+        return raw;
       }
-      if (error && typeof error.message === "string" && error.message) {
-        return error.message;
+      if (raw.indexOf("抽出テキストが安全上限") >= 0) {
+        return t("warning.textOmitted", null, selectedLanguage);
       }
-      return "予期しない処理エラーが発生しました。";
+      if (raw.indexOf("有効な文書テキスト") >= 0) {
+        return t("warning.noText", null, selectedLanguage);
+      }
+      if (raw.indexOf("埋め込み") >= 0 || raw.indexOf("Ole10Native") >= 0 ||
+        raw.indexOf("ExOleObjStg") >= 0 || raw.indexOf("OLE") >= 0) {
+        return t("warning.embedded", null, selectedLanguage);
+      }
+      if (raw.indexOf("メディア") >= 0 || raw.indexOf("OfficeArt") >= 0 ||
+        raw.indexOf("BLIP") >= 0 || raw.indexOf("Pictures stream") >= 0) {
+        return t("warning.media", null, selectedLanguage);
+      }
+      if (raw.indexOf("Excel") >= 0 || raw.indexOf("Worksheet") >= 0 ||
+        raw.indexOf("LabelSst") >= 0 || raw.indexOf("sheet") >= 0) {
+        return t("warning.excel", null, selectedLanguage);
+      }
+      if (raw.indexOf("PowerPoint") >= 0 || raw.indexOf("Current User") >= 0 ||
+        raw.indexOf("CurrentUserAtom") >= 0 || raw.indexOf("Persist") >= 0) {
+        return t("warning.powerpoint", null, selectedLanguage);
+      }
+      if (raw.indexOf("Word") >= 0 || raw.indexOf("脚注") >= 0 ||
+        raw.indexOf("文末脚注") >= 0 || raw.indexOf("テキストボックス") >= 0 ||
+        raw.indexOf("PAPX") >= 0 || raw.indexOf("FTXBXS") >= 0) {
+        return t("warning.word", null, selectedLanguage);
+      }
+      if (raw.indexOf("テキスト") >= 0) {
+        return t("warning.text", null, selectedLanguage);
+      }
+      return t("warning.generic", null, selectedLanguage);
     }
 
-    function statusInfo(label, cssClass, processable, detail) {
+    function localizeWarningTechnicalMessage(message, language) {
+      var raw = String(message.technicalMessage || "");
+      if (!raw || language === "ja") {
+        return raw;
+      }
+      if (message.technicalMessageKey) {
+        var localized = t(message.technicalMessageKey, null, language);
+        return message.technicalCode ?
+          message.technicalCode + ": " + localized : localized;
+      }
+      if (/[\u3040-\u30FF\u3400-\u9FFF]/.test(raw)) {
+        return (message.technicalName || "Error") + ": " +
+          t("error.unexpected", null, language);
+      }
+      return raw;
+    }
+
+    function friendlyError(error, language) {
+      var selectedLanguage = language === "ja" || language === "en" ?
+        language : currentLanguage;
+      if (error instanceof AppError) {
+        if (selectedLanguage === "ja") {
+          return error.rawMessage;
+        }
+        return t(error.messageKey, error.messageParams, selectedLanguage);
+      }
+      if (error && error.name === "RangeError") {
+        return t("error.range", null, selectedLanguage);
+      }
+      if (error && typeof error.message === "string" && error.message) {
+        return t("error.unexpectedWithMessage", {
+          message: error.message
+        }, selectedLanguage);
+      }
+      return t("error.unexpected", null, selectedLanguage);
+    }
+
+    function statusInfo(
+      labelKey,
+      cssClass,
+      processable,
+      detailKey,
+      labelParams,
+      detailParams
+    ) {
       return {
-        label: label,
+        labelKey: labelKey,
+        labelParams: labelParams || {},
         cssClass: cssClass,
         processable: !!processable,
-        detail: detail || ""
+        detailKey: detailKey || "",
+        detailParams: detailParams || {}
       };
+    }
+
+    function applyStaticTranslations() {
+      document.documentElement.setAttribute("lang", currentLanguage);
+      var textNodes = document.querySelectorAll("[data-i18n]");
+      Array.prototype.forEach.call(textNodes, function (node) {
+        node.textContent = t(node.getAttribute("data-i18n"));
+      });
+      var ariaNodes = document.querySelectorAll("[data-i18n-aria-label]");
+      Array.prototype.forEach.call(ariaNodes, function (node) {
+        node.setAttribute(
+          "aria-label",
+          t(node.getAttribute("data-i18n-aria-label"))
+        );
+      });
+      var titleNodes = document.querySelectorAll("[data-i18n-title]");
+      Array.prototype.forEach.call(titleNodes, function (node) {
+        node.setAttribute("title", t(node.getAttribute("data-i18n-title")));
+      });
+      var contentNodes = document.querySelectorAll("[data-i18n-content]");
+      Array.prototype.forEach.call(contentNodes, function (node) {
+        node.setAttribute("content", t(node.getAttribute("data-i18n-content")));
+      });
+      ui.languageJa.setAttribute(
+        "aria-pressed",
+        currentLanguage === "ja" ? "true" : "false"
+      );
+      ui.languageEn.setAttribute(
+        "aria-pressed",
+        currentLanguage === "en" ? "true" : "false"
+      );
+      ui.languageJa.classList.toggle("active", currentLanguage === "ja");
+      ui.languageEn.classList.toggle("active", currentLanguage === "en");
+    }
+
+    function renderProgress() {
+      var progress = appState.progress;
+      var completed = formatNumber(progress.completed, currentLanguage);
+      var total = formatNumber(progress.total, currentLanguage);
+      var percentage = formatNumber(Math.round(progress.percentage), currentLanguage);
+      ui.progressNumbers.textContent = completed + " / " + total + "　" +
+        percentage + "%";
+      ui.progressCurrent.textContent = t(progress.key, progress.params);
+    }
+
+    function setLanguage(language) {
+      var nextLanguage = language === "ja" || language === "en" ? language : "en";
+      if (nextLanguage !== language && typeof console !== "undefined" && console.warn) {
+        console.warn("Unsupported display language: " + language);
+      }
+      currentLanguage = nextLanguage;
+      applyStaticTranslations();
+      renderFileList();
+      renderProgress();
+      renderLogLines();
     }
 
     function isZipSignature(bytes) {
@@ -9619,7 +10691,12 @@
     async function inspectBuffer(bytes, extension) {
       var expected = SUPPORTED_EXTENSIONS[extension];
       if (!expected) {
-        return statusInfo("未対応形式", "warning", false, "未対応の拡張子です。");
+        return statusInfo(
+          "status.unsupported",
+          "warning",
+          false,
+          "status.detail.unsupported"
+        );
       }
       ensure(bytes.length > 0, "EMPTY_FILE", "0バイトのファイルです。");
       if (isZipSignature(bytes)) {
@@ -9627,48 +10704,62 @@
         var zipFamily = await detectOoxmlFamily(zip);
         if (expected.container !== "zip" || expected.family !== zipFamily) {
           return statusInfo(
-            "内部形式不一致",
+            "status.formatMismatch",
             "error",
             false,
-            "拡張子とOOXML内部形式が一致しません。"
+            "status.detail.formatMismatchOoxml"
           );
         }
-        return statusInfo("処理対象", "ok", true, "OOXML " + zipFamily);
+        return statusInfo(
+          "status.ready",
+          "ok",
+          true,
+          "status.detail.ooxml",
+          null,
+          { family: zipFamily }
+        );
       }
       if (startsWithBytes(bytes, CFB_SIGNATURE)) {
         var cfb = new CompoundFile(bytes);
         if (cfb.isEncryptedPackage()) {
           return statusInfo(
-            "暗号化の可能性",
+            "status.encrypted",
             "warning",
             false,
-            "暗号化OOXMLパッケージです。"
+            "status.detail.encryptedOoxml"
           );
         }
         var cfbFamily = detectCompoundFamily(cfb);
         if (legacyEncryptionStatus(cfb, cfbFamily)) {
           return statusInfo(
-            "暗号化の可能性",
+            "status.encrypted",
             "warning",
             false,
-            "Officeバイナリ形式に暗号化情報があります。"
+            "status.detail.encryptedLegacy"
           );
         }
         if (expected.container !== "cfb" || expected.family !== cfbFamily) {
           return statusInfo(
-            "内部形式不一致",
+            "status.formatMismatch",
             "error",
             false,
-            "拡張子とCFB内部形式が一致しません。"
+            "status.detail.formatMismatchCfb"
           );
         }
-        return statusInfo("処理対象", "ok", true, "CFB " + cfbFamily);
+        return statusInfo(
+          "status.ready",
+          "ok",
+          true,
+          "status.detail.cfb",
+          null,
+          { family: cfbFamily }
+        );
       }
       return statusInfo(
-        "内部形式不一致",
+        "status.formatMismatch",
         "error",
         false,
-        "ZIPまたはCFBシグネチャがありません。"
+        "status.detail.missingSignature"
       );
     }
 
@@ -9735,17 +10826,21 @@
             var code = error instanceof AppError ? error.code : "";
             if (code === "ENCRYPTED" || code === "ZIP_ENCRYPTED") {
               item.inspectionStatus = statusInfo(
-                "暗号化の可能性",
+                "status.encrypted",
                 "warning",
                 false,
-                friendlyError(error)
+                "message.value",
+                null,
+                { message: error }
               );
             } else {
               item.inspectionStatus = statusInfo(
-                "解析エラー",
+                "status.error",
                 "error",
                 false,
-                friendlyError(error)
+                "message.value",
+                null,
+                { message: error }
               );
             }
           }
@@ -9792,19 +10887,16 @@
           return;
         }
         if (file.size === 0) {
-          logMessage("warning", "0バイトのため追加しませんでした: " + file.name);
+          logMessage("warning", "log.zeroByteSkipped", { name: file.name });
           return;
         }
         if (file.size > MAX_INPUT_FILE_BYTES) {
-          logMessage("warning",
-            "入力ファイルのサイズ上限を超えています: " + file.name);
+          logMessage("warning", "log.fileTooLarge", { name: file.name });
           return;
         }
         if (!Number.isSafeInteger(totalInputBytes + file.size) ||
           totalInputBytes + file.size > MAX_TOTAL_INPUT_BYTES) {
-          logMessage("warning",
-            "入力ファイルの合計サイズが安全上限を超えるため追加しませんでした: " +
-            file.name);
+          logMessage("warning", "log.totalTooLarge", { name: file.name });
           return;
         }
         totalInputBytes += file.size;
@@ -9823,14 +10915,24 @@
           processingStatus: null,
           inspectionStatus: browserUnsupported ?
             statusInfo(
-              "ブラウザ非対応",
+              "status.browserUnsupported",
               "warning",
               false,
-              "このブラウザではOOXML形式のZIP展開機能を利用できません。"
+              "status.detail.browserUnsupported"
             ) :
             (supported ?
-              statusInfo("確認中", "pending", false, "内部形式を確認しています。") :
-              statusInfo("未対応形式", "warning", false, "未対応の拡張子です。"))
+              statusInfo(
+                "status.checking",
+                "pending",
+                false,
+                "status.detail.checking"
+              ) :
+              statusInfo(
+                "status.unsupported",
+                "warning",
+                false,
+                "status.detail.unsupported"
+              ))
         };
         appState.items.push(item);
         added += 1;
@@ -9841,14 +10943,13 @@
       renderFileList();
       updateControls();
       if (added) {
-        logMessage("info", added + "件のファイルを追加しました。");
+        logMessage("info", "log.filesAdded", null, added);
       }
       if (skippedSubfolders) {
-        logMessage("info", "サブフォルダ内の" + skippedSubfolders +
-          "件はオプションがオフのため追加しませんでした。");
+        logMessage("info", "log.subfoldersSkipped", null, skippedSubfolders);
       }
       if (!added && !skippedSubfolders) {
-        logMessage("info", "追加できるファイルはありませんでした。");
+        logMessage("info", "log.noFilesAdded");
       }
     }
 
@@ -9857,17 +10958,18 @@
       row._selectCheckbox.disabled = appState.busy;
       row._selectCheckbox.setAttribute(
         "aria-label",
-        item.file.name + "を削除対象として選択"
+        t("table.selectItem", { name: item.file.name })
       );
+      row._selectCheckbox.title = t("table.selectItemTitle");
       row._nameCell.textContent = item.file.name;
       row._pathCell.textContent = item.path;
       row._extensionCell.textContent = item.extension ? "." + item.extension : "—";
       row._sizeCell.textContent = formatBytes(item.file.size);
       var itemStatus = displayedItemStatus(item);
       row._status.className = "status " + itemStatus.cssClass;
-      row._status.textContent = itemStatus.label;
-      if (itemStatus.detail) {
-        row._status.title = itemStatus.detail;
+      row._status.textContent = t(itemStatus.labelKey, itemStatus.labelParams);
+      if (itemStatus.detailKey) {
+        row._status.title = t(itemStatus.detailKey, itemStatus.detailParams);
       } else {
         row._status.removeAttribute("title");
       }
@@ -9878,7 +10980,7 @@
       var selectCell = document.createElement("td");
       var checkbox = document.createElement("input");
       checkbox.type = "checkbox";
-      checkbox.title = "削除対象として選択";
+      checkbox.title = t("table.selectItemTitle");
       checkbox.addEventListener("change", function () {
         item.selected = checkbox.checked;
         updateFileRow(item);
@@ -9920,7 +11022,7 @@
         emptyRow.className = "empty-row";
         var emptyCell = document.createElement("td");
         emptyCell.colSpan = 6;
-        emptyCell.textContent = "Officeファイルが追加されていません。";
+        emptyCell.textContent = t("table.empty");
         emptyRow.appendChild(emptyCell);
         ui.fileList.appendChild(emptyRow);
         ui.selectAll.checked = false;
@@ -9996,27 +11098,35 @@
       updateSelectionState();
     }
 
-    function setProgress(completed, total, percentage, current) {
+    function setProgress(completed, total, percentage, key, params) {
       var safeTotal = Math.max(0, total);
       var safeCompleted = Math.max(0, Math.min(completed, safeTotal));
       var next = Math.max(appState.lastProgress, Math.min(100, Math.max(0, percentage)));
       appState.lastProgress = next;
+      appState.progress = {
+        completed: safeCompleted,
+        total: safeTotal,
+        percentage: next,
+        key: key || "progress.waiting",
+        params: params || {}
+      };
       ui.progressBar.style.width = next.toFixed(2) + "%";
       ui.progressTrack.setAttribute("aria-valuenow", String(Math.round(next)));
-      ui.progressNumbers.textContent = safeCompleted + " / " + safeTotal +
-        "　" + Math.round(next) + "%";
-      ui.progressCurrent.textContent = current || "待機中";
+      renderProgress();
     }
 
     function resetProgress() {
       appState.lastProgress = 0;
-      setProgress(0, 0, 0, "待機中");
+      setProgress(0, 0, 0, "progress.waiting");
     }
 
     function summarizeResult(fileName, mediaCount, characterCount, embeddingCount) {
-      return fileName + "（メディア" + mediaCount + "件、テキスト" +
-        characterCount.toLocaleString("ja-JP") + "文字、埋め込み" +
-        embeddingCount + "件）";
+      return translationValue("summary.result", {
+        name: fileName,
+        media: pluralValue("summary.media", mediaCount),
+        characters: pluralValue("summary.characters", characterCount),
+        embeddings: pluralValue("summary.embeddings", embeddingCount)
+      });
     }
 
     async function processOfficeBuffer(item, bytes, options, currentOutputBytes, stage) {
@@ -10030,7 +11140,7 @@
       var embeddings = [];
       var textResult = null;
 
-      stage("内部形式を確認しています", 0.12);
+      stage("progress.checkingInternalFormat", 0.12);
       var archive = null;
       var cfb = null;
       var family;
@@ -10069,7 +11179,7 @@
       }
 
       checkCancelled();
-      stage("メディアを抽出しています", 0.3);
+      stage("progress.extractingMedia", 0.3);
       try {
         if (archive) {
           var mediaResult = await extractZipPrefix(
@@ -10084,13 +11194,17 @@
         }
       } catch (error) {
         throwIfCategoryLimitOrCancelled(error);
-        warnings.push("メディアを抽出できませんでした: " + friendlyError(error));
+        warnings.push(warningValue(
+          "warning.categoryExtractionFailed",
+          { subject: translationValue("warning.subject.media") },
+          error
+        ));
         media = [];
       }
 
       if (options.text) {
         checkCancelled();
-        stage("テキストを抽出しています", 0.52);
+        stage("progress.extractingText", 0.52);
         try {
           var extractedText = archive ?
             await extractOoxmlText(archive, family, warnings) :
@@ -10100,18 +11214,22 @@
             warnings.push(textResult.warning);
             textResult = null;
           } else if (!textResult) {
-            warnings.push("有効な文書テキストが見つかりませんでした。");
+            warnings.push(warningValue("warning.noText"));
           }
         } catch (error) {
           throwIfCategoryLimitOrCancelled(error);
-          warnings.push("テキストを抽出できませんでした: " + friendlyError(error));
+          warnings.push(warningValue(
+            "warning.categoryExtractionFailed",
+            { subject: translationValue("warning.subject.text") },
+            error
+          ));
           textResult = null;
         }
       }
 
       if (options.embeddings) {
         checkCancelled();
-        stage("埋め込みデータを抽出しています", 0.72);
+        stage("progress.extractingEmbeddings", 0.72);
         try {
           if (archive) {
             var embeddingResult = await extractZipPrefix(
@@ -10126,13 +11244,17 @@
           }
         } catch (error) {
           throwIfCategoryLimitOrCancelled(error);
-          warnings.push("埋め込みデータを抽出できませんでした: " + friendlyError(error));
+          warnings.push(warningValue(
+            "warning.categoryExtractionFailed",
+            { subject: translationValue("warning.subject.embedding") },
+          error
+          ));
           embeddings = [];
         }
       }
 
       checkCancelled();
-      stage("ZIPへ追加しています", 0.9);
+      stage("progress.addingToZip", 0.9);
       return {
         media: media,
         text: textResult,
@@ -10149,7 +11271,7 @@
         return item.inspectionStatus.processable;
       });
       if (!targets.length) {
-        logMessage("warning", "処理対象ファイルがありません。");
+        logMessage("warning", "log.noProcessableFiles");
         return;
       }
 
@@ -10182,17 +11304,18 @@
           var baseProgress = targetIndex / targets.length * 96;
           var span = 96 / targets.length;
           item.processingStatus = statusInfo(
-            "処理中",
+            "status.processing",
             "pending",
             false,
-            "抽出処理を実行しています。"
+            "status.detail.processing"
           );
           updateFileRow(item);
           setProgress(
             targetIndex,
             targets.length,
             baseProgress,
-            item.file.name + "：ファイルを読み込んでいます"
+            "progress.readingFile",
+            { name: item.file.name }
           );
           try {
             bytes = item.cachedBytes ||
@@ -10208,7 +11331,11 @@
                   targetIndex,
                   targets.length,
                   baseProgress + span * fraction,
-                  item.file.name + "：" + label
+                  "progress.fileStage",
+                  {
+                    name: item.file.name,
+                    stage: translationValue(label)
+                  }
                 );
               }
             );
@@ -10221,21 +11348,25 @@
               warningIndex += 1) {
               logMessage(
                 "warning",
-                item.file.name + "：" + result.warnings[warningIndex]
+                "log.fileWarning",
+                {
+                  name: item.file.name,
+                  warning: runtimeWarningValue(result.warnings[warningIndex])
+                }
               );
               await cooperativeYield(warningIndex + 1, 20);
             }
             if (extractedFiles === 0) {
               emptyCount += 1;
               item.processingStatus = statusInfo(
-                "結果なし",
+                "status.noResults",
                 "warning",
                 false,
-                "解析は完了しましたが、抽出対象がありませんでした。"
+                "status.detail.noResults"
               );
-              logMessage("warning",
-                "抽出可能なメディア、テキスト、埋め込みデータが見つかりません: " +
-                item.file.name);
+              logMessage("warning", "log.noExtractableContent", {
+                name: item.file.name
+              });
             } else {
               var sourceStem = buildSourceOutputStem(item.file.name);
               rootName = buildOutputRootPath(
@@ -10304,30 +11435,34 @@
               }
               extractedCount += 1;
               item.processingStatus = statusInfo(
-                result.warnings.length ? "警告あり" : "抽出完了",
+                result.warnings.length ?
+                  "status.completedWithWarnings" : "status.completed",
                 result.warnings.length ? "warning" : "ok",
                 false,
                 result.warnings.length ?
-                  "一部の抽出処理に警告があります。" :
-                  "抽出処理が完了しました。"
+                  "status.detail.completedWithWarnings" :
+                  "status.detail.completed"
               );
               logMessage(
                 result.warnings.length ? "warning" : "ok",
-                summarizeResult(
-                  item.file.name,
-                  result.media.length,
-                  result.text ? result.text.characterCount : 0,
-                  result.embeddings.length
-                )
+                "message.value",
+                {
+                  message: summarizeResult(
+                    item.file.name,
+                    result.media.length,
+                    result.text ? result.text.characterCount : 0,
+                    result.embeddings.length
+                  )
+                }
               );
             }
           } catch (error) {
             if (error instanceof AppError && error.code === "CANCELLED") {
               item.processingStatus = statusInfo(
-                "中止",
+                "status.cancelled",
                 "warning",
                 false,
-                "利用者の操作により処理を中止しました。"
+                "status.detail.cancelled"
               );
               throw error;
             }
@@ -10340,21 +11475,28 @@
                  error.code === "NAME_COLLISION" ||
                  error.code === "MEMORY"))) {
               item.processingStatus = statusInfo(
-                "処理失敗",
+                "status.processingFailed",
                 "error",
                 false,
-                friendlyError(error)
+                "message.value",
+                null,
+                { message: error }
               );
               throw error;
             }
             failedCount += 1;
             item.processingStatus = statusInfo(
-              "処理失敗",
+              "status.processingFailed",
               "error",
               false,
-              friendlyError(error)
+              "message.value",
+              null,
+              { message: error }
             );
-            logMessage("error", friendlyError(error) + ": " + item.file.name);
+            logMessage("error", "log.fileError", {
+              message: error,
+              name: item.file.name
+            });
           } finally {
             releaseItemCache(item);
             bytes = null;
@@ -10364,18 +11506,19 @@
             targetIndex + 1,
             targets.length,
             (targetIndex + 1) / targets.length * 96,
-            item.file.name + "：処理を終了しました"
+            "progress.fileFinished",
+            { name: item.file.name }
           );
           await delayTurn();
         }
 
         checkCancelled();
         if (!zipBuilder.entries.length) {
-          logMessage("warning", "ZIPへ保存できる抽出結果がありませんでした。");
-          setProgress(targets.length, targets.length, 100, "完了しました");
+          logMessage("warning", "log.noZipResults");
+          setProgress(targets.length, targets.length, 100, "progress.completed");
           return;
         }
-        setProgress(targets.length, targets.length, 97, "ZIPを生成しています");
+        setProgress(targets.length, targets.length, 97, "progress.generatingZip");
         await delayTurn();
         checkCancelled();
         var blob = zipBuilder.toBlob();
@@ -10384,17 +11527,30 @@
         var outputName = "document_content_" +
           timestampForFileName(new Date()) + ".zip";
         downloadBlob(blob, outputName);
-        setProgress(targets.length, targets.length, 100, "完了しました");
-        logMessage("ok", outputName + " を生成しました（抽出成功" + extractedCount +
-          "件、結果なし" + emptyCount + "件、失敗" + failedCount + "件）。");
+        setProgress(targets.length, targets.length, 100, "progress.completed");
+        logMessage("ok", "log.zipGenerated", {
+          name: outputName,
+          success: numberValue(extractedCount),
+          empty: numberValue(emptyCount),
+          failed: numberValue(failedCount)
+        });
       } catch (error) {
         if (error instanceof AppError && error.code === "CANCELLED") {
-          logMessage("info", "利用者の操作により処理を中止しました。");
-          setProgress(0, targets.length, appState.lastProgress, "処理を中止しました");
+          logMessage("info", "log.cancelled");
+          setProgress(
+            0,
+            targets.length,
+            appState.lastProgress,
+            "progress.cancelled"
+          );
         } else {
-          logMessage("error", friendlyError(error));
-          setProgress(0, targets.length, appState.lastProgress,
-            "エラーで終了しました");
+          logMessage("error", "message.value", { message: error });
+          setProgress(
+            0,
+            targets.length,
+            appState.lastProgress,
+            "progress.error"
+          );
         }
       } finally {
         targets.forEach(releaseItemCache);
@@ -10645,13 +11801,15 @@
       }));
       addFileEntries(entries);
       if (failedDirectories) {
-        logMessage("warning", failedDirectories +
-          "件のフォルダをドラッグ＆ドロップで読み取れませんでした。" +
-          "「フォルダを追加」を使用してください。");
+        logMessage(
+          "warning",
+          "log.folderReadFailed",
+          null,
+          failedDirectories
+        );
       }
       if (failedItems && !fallbackFiles.length) {
-        logMessage("warning", failedItems +
-          "件のドロップ項目を読み取れませんでした。「ファイルを追加」を使用してください。");
+        logMessage("warning", "log.dropItemsFailed", null, failedItems);
       }
     }
 
@@ -10661,6 +11819,14 @@
       }
       ui.fileInput.click();
     }
+
+    ui.languageJa.addEventListener("click", function () {
+      setLanguage("ja");
+    });
+
+    ui.languageEn.addEventListener("click", function () {
+      setLanguage("en");
+    });
 
     ui.addFiles.addEventListener("click", openFilePicker);
 
@@ -10694,7 +11860,7 @@
       });
       renderFileList();
       updateControls();
-      logMessage("info", removedItems.length + "件を一覧から削除しました。");
+      logMessage("info", "log.removed", null, removedItems.length);
     });
 
     ui.clearFiles.addEventListener("click", function () {
@@ -10704,7 +11870,7 @@
       renderFileList();
       updateControls();
       resetProgress();
-      logMessage("info", count + "件の入力一覧をクリアしました。");
+      logMessage("info", "log.listCleared", null, count);
     });
 
     ui.selectAll.addEventListener("change", function () {
@@ -10723,11 +11889,17 @@
       }
       appState.cancelRequested = true;
       ui.cancelProcessing.disabled = true;
-      logMessage("info", "処理の中止を要求しました。現在の安全な区切りで停止します。");
+      logMessage("info", "log.cancelRequested");
     });
 
     ui.clearLog.addEventListener("click", function () {
-      appState.logLines = ["[情報] ログを消去しました。"];
+      appState.logEntries = [{
+        level: "info",
+        key: "log.cleared",
+        params: {},
+        pluralCount: null,
+        renderedLineCount: 1
+      }];
       appState.logNodes = [];
       appState.logDomDirty = false;
       appState.logStarted = true;
@@ -10790,7 +11962,7 @@
       }
       handleDrop(dataTransfer).catch(function (error) {
         resetPageDropState();
-        logMessage("error", "ドロップした項目を読み取れませんでした: " + friendlyError(error));
+        logMessage("error", "log.dropReadFailed", { message: error });
       });
     }, true);
 
@@ -10804,13 +11976,14 @@
       }
     });
 
+    applyStaticTranslations();
     renderFileList();
     updateControls();
     resetProgress();
+    renderLogLines();
     if (typeof DecompressionStream !== "function") {
       ui.compatibilityWarning.hidden = false;
-      logMessage("warning",
-        "このブラウザはDeflate展開APIに対応していません。ChromeまたはEdgeの現行安定版を使用してください。");
+      logMessage("warning", "log.browserUnsupported");
     }
     document.documentElement.setAttribute("data-document-content-extractor-ready", "true");
 

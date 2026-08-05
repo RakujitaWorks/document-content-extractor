@@ -134,15 +134,31 @@
     }
 
     .hero {
+      margin-bottom: 16px;
+    }
+
+    .hero-utility-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .hero-utility-row .language-switcher {
+      margin-left: auto;
+    }
+
+    .hero-main {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 22px;
       align-items: end;
-      margin-bottom: 16px;
     }
 
     .eyebrow {
-      margin: 0 0 4px;
+      margin: 0;
       color: #7f9ecb;
       font-family: Consolas, "Yu Gothic UI", monospace;
       font-size: 0.72rem;
@@ -174,6 +190,38 @@
       max-width: 780px;
       margin: 8px 0 0;
       color: var(--muted);
+    }
+
+    .language-switcher {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px;
+      background: #101925;
+    }
+
+    .language-switcher button {
+      min-width: 0;
+      border: 0;
+      border-radius: 4px;
+      padding: 4px 8px;
+      color: var(--muted);
+      background: transparent;
+      font-size: 0.76rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .language-switcher button:hover {
+      border-color: transparent;
+      color: var(--ink-strong);
+      background: var(--surface-hover);
+    }
+
+    .language-switcher button.active,
+    .language-switcher button[aria-pressed="true"] {
+      color: #f8fbff;
+      background: var(--accent-dark);
     }
 
     .local-badge {
@@ -722,7 +770,7 @@
         padding: 24px 0 38px;
       }
 
-      .hero,
+      .hero-main,
       .notes {
         grid-template-columns: 1fr;
       }
@@ -755,7 +803,7 @@
     }
 
     @media (max-width: 480px) {
-      .hero {
+      .hero-main {
         gap: 18px;
       }
 
