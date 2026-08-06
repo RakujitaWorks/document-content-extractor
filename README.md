@@ -2,7 +2,7 @@
 
 Document Content Extractorは、Word・Excel・PowerPointファイルから画像、テキスト、埋め込みデータを抽出し、ZIPにまとめるブラウザツールです。
 
-Version 1.0.0
+Version 1.0.1
 
 ファイルの解析とZIP生成はブラウザ内で行われ、選択したファイルを外部サーバーへ送信しません。
 
