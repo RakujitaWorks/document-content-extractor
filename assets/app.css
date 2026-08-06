@@ -796,6 +796,10 @@
         overflow-x: hidden;
       }
 
+      .table-shell:has(.empty-row) thead {
+        display: none;
+      }
+
       .table-shell:has(.empty-row) table {
         width: 100%;
         min-width: 100%;

@@ -215,6 +215,8 @@
         "warning.legacyAnnotationEmptyStory": "旧Wordの{subject}本文がない状態で参照PLCを解析できませんでした。",
         "warning.legacyAnnotationCountMismatch": "旧Wordの{subject}参照数と本文数が一致しないため、対応できる範囲だけを配置します。",
         "warning.legacyAnnotationPositionFallback": "旧Wordの{subject}参照位置を復元できないため、独立セクションへ出力します。理由: {message}",
+        "warning.legacyHeaderFooterClassificationFallback": "旧Word形式のヘッダーとフッターを分類できなかったため、まとめて出力しました。\n理由: {message}",
+        "warning.legacyHeaderStoryGuardMissing": "旧Word形式のヘッダー／フッターstoryにガード段落がありませんでした。取得できた内容をそのまま出力します。",
         "warning.legacyTextboxPlcFallback": "旧Wordの{subject}本文PLCを解析できないため、「{section}」セクションへ出力します。理由: {message}",
         "warning.legacyTextboxInvalidRange.one": "旧Wordの{subject}に不正なテキスト範囲が{count}件あるため、取得可能な本文を「{section}」セクションへ出力します。",
         "warning.legacyTextboxInvalidRange.other": "旧Wordの{subject}に不正なテキスト範囲が{count}件あるため、取得可能な本文を「{section}」セクションへ出力します。",
@@ -461,6 +463,8 @@
         "warning.legacyAnnotationEmptyStory": "The legacy Word {subject} reference PLC could not be parsed because no annotation body text was present.",
         "warning.legacyAnnotationCountMismatch": "The legacy Word {subject} reference count did not match the body count; only matching entries were placed.",
         "warning.legacyAnnotationPositionFallback": "The positions of legacy Word {subject} references could not be reconstructed, so they were placed in a separate section. Reason: {message}",
+        "warning.legacyHeaderFooterClassificationFallback": "The headers and footers in the legacy Word file could not be classified and were exported together.\nReason: {message}",
+        "warning.legacyHeaderStoryGuardMissing": "A header or footer story in the legacy Word file did not contain a guard paragraph. The available content will be exported as-is.",
         "warning.legacyTextboxPlcFallback": "The body PLC for the legacy Word {subject} could not be parsed, so its text will be placed in the \"{section}\" section. Reason: {message}",
         "warning.legacyTextboxInvalidRange.one": "The legacy Word {subject} contains {count} invalid text range, so recoverable text will be placed in the \"{section}\" section.",
         "warning.legacyTextboxInvalidRange.other": "The legacy Word {subject} contains {count} invalid text ranges, so recoverable text will be placed in the \"{section}\" section.",
@@ -6179,6 +6183,7 @@
         plcffndRef: readFcLcbPair(2, "PlcffndRef"),
         plcffndTxt: readFcLcbPair(3, "PlcffndTxt"),
         plcfSed: readFcLcbPair(6, "PlcfSed"),
+        plcfHdd: readFcLcbPair(11, "PlcfHdd"),
         plcfBtePapx: readFcLcbPair(13, "PlcfBtePapx"),
         clx: readFcLcbPair(33, "Clx"),
         plcSpaMom: readFcLcbPair(40, "PlcSpaMom"),
@@ -7369,14 +7374,115 @@
       return output;
     }
 
-    async function renderLegacyWordHeaderStory(raw, textboxSet) {
+    function parseLegacyWordHeaderStories(tableBytes, fib, headerStory) {
+      var pair = fib.fcLcb.plcfHdd;
+      ensure(pair && pair.present, "WORD_HEADER_PLC",
+        "Word FIBにPlcfHddのfc/lcbペアがありません。");
+      ensure(pair.lcb > 0, "WORD_HEADER_PLC",
+        "Word PlcfHddがありません。");
+      ensure(pair.lcb % 4 === 0, "WORD_HEADER_PLC",
+        "Word PlcfHddのサイズが4の倍数ではありません。");
+      requireRange(tableBytes, pair.fc, pair.lcb, "Word PlcfHdd");
+
+      var cpCount = pair.lcb / 4;
+      ensure(cpCount <= 1000000, "WORD_HEADER_PLC",
+        "Word PlcfHddのCP数が安全上限を超えています。");
+      ensure(cpCount >= 8, "WORD_HEADER_PLC",
+        "Word PlcfHddのCP数が不足しています。");
+      var storyCount = cpCount - 2;
+      ensure(storyCount >= 6, "WORD_HEADER_PLC",
+        "Word PlcfHddのstory数が不足しています。");
+      ensure((storyCount - 6) % 6 === 0, "WORD_HEADER_PLC",
+        "Word PlcfHddのstory数が6 + 6nではありません。");
+      ensure(headerStory && headerStory.count > 0, "WORD_HEADER_PLC",
+        "Word Header Documentがありません。");
+
+      var headerEndCp = headerStory.count - 1;
+      var cps = [];
+      var index;
+      for (index = 0; index <= storyCount; index += 1) {
+        cps.push(u32(tableBytes, pair.fc + index * 4));
+        if (index > 0) {
+          ensure(cps[index] >= cps[index - 1], "WORD_HEADER_PLC",
+            "Word PlcfHddのCPが降順です。");
+        }
+        ensure(cps[index] <= headerEndCp, "WORD_HEADER_PLC",
+          "Word PlcfHddのCPがHeader Document範囲外です。");
+        if (index > 0 && index % 1000 === 0) {
+          checkCancelled();
+        }
+      }
+      ensure(cps[0] === 0, "WORD_HEADER_PLC",
+        "Word PlcfHddの先頭CPが0ではありません。");
+      ensure(cps[storyCount] === headerEndCp, "WORD_HEADER_PLC",
+        "Word PlcfHddの最終story終了CPがccpHdd - 1ではありません。");
+
+      var stories = [];
+      for (index = 0; index < storyCount; index += 1) {
+        var kind = "separator";
+        var variant = "separator";
+        var sectionIndex = -1;
+        var typeIndex = index;
+        if (index >= 6) {
+          var relativeIndex = index - 6;
+          sectionIndex = Math.floor(relativeIndex / 6);
+          typeIndex = relativeIndex % 6;
+          if (typeIndex === 0) {
+            kind = "header";
+            variant = "even";
+          } else if (typeIndex === 1) {
+            kind = "header";
+            variant = "odd";
+          } else if (typeIndex === 2) {
+            kind = "footer";
+            variant = "even";
+          } else if (typeIndex === 3) {
+            kind = "footer";
+            variant = "odd";
+          } else if (typeIndex === 4) {
+            kind = "header";
+            variant = "first";
+          } else {
+            kind = "footer";
+            variant = "first";
+          }
+        }
+        stories.push({
+          index: index,
+          sectionIndex: sectionIndex,
+          typeIndex: typeIndex,
+          kind: kind,
+          variant: variant,
+          startCp: cps[index],
+          endCp: cps[index + 1],
+          raw: headerStory.raw.substring(cps[index], cps[index + 1])
+        });
+        if (index > 0 && index % 1000 === 0) {
+          checkCancelled();
+        }
+      }
+      return {
+        available: true,
+        stories: stories
+      };
+    }
+
+    function stripLegacyWordHeaderStoryGuard(raw) {
+      if (raw && raw.charCodeAt(raw.length - 1) === 0x0D) {
+        return raw.substring(0, raw.length - 1);
+      }
+      return raw;
+    }
+
+    async function renderLegacyWordHeaderStory(raw, textboxSet, baseCp) {
       var combined = "";
       var paragraphTextboxes = [];
       var cp;
       for (cp = 0; cp < raw.length; cp += 1) {
+        var globalCp = (baseCp || 0) + cp;
         collectLegacyWordTextboxesAtCp(
           textboxSet,
-          cp,
+          globalCp,
           paragraphTextboxes
         );
         var code = raw.charCodeAt(cp);
@@ -8383,6 +8489,36 @@
         outputWarnings,
         warningSeen
       );
+      var headerStoryInfo = {
+        available: true,
+        stories: []
+      };
+      if (stories.header.count > 0) {
+        try {
+          headerStoryInfo = parseLegacyWordHeaderStories(
+            tableBytes,
+            fib,
+            stories.header
+          );
+        } catch (error) {
+          throwIfCategoryLimitOrCancelled(error);
+          addWordExtractionWarning(
+            outputWarnings,
+            warningSeen,
+            "legacy-header-footer-classification",
+            warningValue(
+              "warning.legacyHeaderFooterClassificationFallback",
+              null,
+              error
+            )
+          );
+          headerStoryInfo = {
+            available: false,
+            stories: [],
+            error: error
+          };
+        }
+      }
       var footnotes = readLegacyWordAnnotationSet(
         "footnote",
         fib,
@@ -8461,14 +8597,71 @@
       if (hasMeaningfulText(mainResult.text)) {
         sections.push(mainResult.text);
       }
-      var renderedHeader = await renderLegacyWordHeaderStory(
-        stories.header.raw,
-        headerTextboxes
-      );
-      if (hasMeaningfulText(renderedHeader)) {
-        sections.push(
-          "===== ヘッダー／フッター =====\n" + renderedHeader
+      if (headerStoryInfo.available) {
+        var renderedHeaderStories = [];
+        var headerStoryIndex;
+        for (headerStoryIndex = 0;
+          headerStoryIndex < headerStoryInfo.stories.length;
+          headerStoryIndex += 1) {
+          var headerStory = headerStoryInfo.stories[headerStoryIndex];
+          if (headerStory.kind === "separator" ||
+            headerStory.startCp === headerStory.endCp) {
+            continue;
+          }
+          if (!headerStory.raw ||
+            headerStory.raw.charCodeAt(headerStory.raw.length - 1) !== 0x0D) {
+            addWordExtractionWarning(
+              outputWarnings,
+              warningSeen,
+              "legacy-header-story-guard-missing",
+              warningValue("warning.legacyHeaderStoryGuardMissing")
+            );
+          }
+          var renderedHeaderStory = await renderLegacyWordHeaderStory(
+            stripLegacyWordHeaderStoryGuard(headerStory.raw),
+            headerTextboxes,
+            headerStory.startCp
+          );
+          if (hasMeaningfulText(renderedHeaderStory)) {
+            renderedHeaderStories.push({
+              kind: headerStory.kind,
+              renderedText: renderedHeaderStory
+            });
+          }
+        }
+        var renderedHeaders = [];
+        var renderedFooters = [];
+        for (headerStoryIndex = 0;
+          headerStoryIndex < renderedHeaderStories.length;
+          headerStoryIndex += 1) {
+          if (renderedHeaderStories[headerStoryIndex].kind === "header") {
+            renderedHeaders.push(
+              renderedHeaderStories[headerStoryIndex].renderedText
+            );
+          } else if (renderedHeaderStories[headerStoryIndex].kind === "footer") {
+            renderedFooters.push(
+              renderedHeaderStories[headerStoryIndex].renderedText
+            );
+          }
+        }
+        if (renderedHeaders.length) {
+          sections.push("===== ヘッダー =====\n" + renderedHeaders.join("\n"));
+        }
+        if (renderedFooters.length) {
+          sections.push("===== フッター =====\n" + renderedFooters.join("\n"));
+        }
+      } else {
+        var renderedHeaderFallback = await renderLegacyWordHeaderStory(
+          stories.header.raw,
+          headerTextboxes,
+          0
         );
+        if (hasMeaningfulText(renderedHeaderFallback)) {
+          sections.push(
+            "===== ヘッダー／フッター（分類できませんでした） =====\n" +
+            renderedHeaderFallback
+          );
+        }
       }
       addLegacyWordStorySection(sections, "コメント", stories.annotation.raw);
 
